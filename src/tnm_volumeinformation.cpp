@@ -58,6 +58,7 @@ void TNMVolumeInformation::process() {
 
 				// Setting the unique identifier as the voxelIndex
 				_data->at(i).voxelIndex = i;
+				
 				//
 				// use iX, iY, iZ, i, and the VolumeUInt16::voxel method to derive the measures here
 				//
@@ -74,23 +75,23 @@ void TNMVolumeInformation::process() {
 				//
 				// Average
 				//
-				float average = 0.f;
+				
+				
+				float average = 0.0;
 				int counter = 0;
 
-// 				for(int z = -1; z < 2; z++)
-// 				{
-// 				    for(int y = -1; y < 2; y++)
-// 				    {
-// 					for(int x = -1; x < 2; x++)
-// 					{
-// 					    if( y > 0 && y < dimensions.y || x > 0 && x < dimensions.x || z > 0 && z < dimensions.z ){
-// 					    
-// 					    average += volume->voxel(iX,iY,iZ);
-// 					    counter++;
-// 					    }
-// 					}
-// 				    }
-// 				}
+				for(int z = -1; z < 2; z++){
+				    for(int y = -1; y < 2; y++){
+					for(int x = -1; x < 2; x++){
+					    if( (iX > 0 && iX < dimensions.x) && (iY > 0 && iY < dimensions.y) && (iZ > 0 && iZ < dimensions.z) ){
+					      
+						average += volume->voxel(iX+x, iY+y, iZ+z);
+						counter++;
+					    }
+					}
+				    }
+				}
+				
 
 				// Compute the average; the voxel method accepts both a single parameter
 				// as well as three parameters
