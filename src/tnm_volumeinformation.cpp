@@ -4,7 +4,7 @@
 namespace voreen {
 
 	const std::string loggerCat_ = "TNMVolumeInformation";
-	
+
 namespace {
 	// This ordering function allows us to sort the Data vector by the voxelIndex
 	// The extraction *should* produce a sorted list, but you never know
@@ -54,32 +54,48 @@ void TNMVolumeInformation::process() {
 				// i is a unique identifier for the voxel calculated by the following
 				// (probably one of the most important) formulas:
 				// iZ*dimensions.x*dimensions.y + iY*dimensions.x + iX;
-                const size_t i = VolumeUInt16::calcPos(volume->getDimensions(), tgt::svec3(iX, iY, iZ));
+				const size_t i = VolumeUInt16::calcPos(volume->getDimensions(), tgt::svec3(iX, iY, iZ));
 
 				// Setting the unique identifier as the voxelIndex
 				_data->at(i).voxelIndex = i;
-                //
+				//
 				// use iX, iY, iZ, i, and the VolumeUInt16::voxel method to derive the measures here
-                //
-
+				//
+				//volume->voxel(ix,iy,iz)
 				//
 				// Intensity
 				//
-				float intensity = -1.f;
+				//float intensity = -1.f;
 				// Retrieve the intensity using the 'VolumeUInt16's voxel method
-
+				float intensity = volume->voxel(iX,iY,iZ);
 
 				_data->at(i).dataValues[0] = intensity;
 
 				//
 				// Average
 				//
-				float average = -1.f;
+				float average = 0.f;
+				int counter = 0;
+
+// 				for(int z = -1; z < 2; z++)
+// 				{
+// 				    for(int y = -1; y < 2; y++)
+// 				    {
+// 					for(int x = -1; x < 2; x++)
+// 					{
+// 					    if( y > 0 && y < dimensions.y || x > 0 && x < dimensions.x || z > 0 && z < dimensions.z ){
+// 					    
+// 					    average += volume->voxel(iX,iY,iZ);
+// 					    counter++;
+// 					    }
+// 					}
+// 				    }
+// 				}
+
 				// Compute the average; the voxel method accepts both a single parameter
 				// as well as three parameters
 
-
-				_data->at(i).dataValues[1] = average;
+				_data->at(i).dataValues[1] = average/counter;
 
 				//
 				// Standard deviation
