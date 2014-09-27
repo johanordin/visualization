@@ -1,6 +1,6 @@
 #include "modules/tnm093/include/tnm_volumeinformation.h"
 #include "voreen/core/datastructures/volume/volumeatomic.h"
-
+#include <iostream>
 namespace voreen {
 
 	const std::string loggerCat_ = "TNMVolumeInformation";
@@ -51,72 +51,167 @@ void TNMVolumeInformation::process() {
     for (size_t iX = 0; iX < dimensions.x; ++iX) {
         for (size_t iY = 0; iY < dimensions.y; ++iY) {
             for (size_t iZ = 0; iZ < dimensions.z; ++iZ) {
-				// i is a unique identifier for the voxel calculated by the following
-				// (probably one of the most important) formulas:
-				// iZ*dimensions.x*dimensions.y + iY*dimensions.x + iX;
-				const size_t i = VolumeUInt16::calcPos(volume->getDimensions(), tgt::svec3(iX, iY, iZ));
+		// i is a unique identifier for the voxel calculated by the following
+		// (probably one of the most important) formulas:
+		// iZ*dimensions.x*dimensions.y + iY*dimensions.x + iX;
+                const size_t i = VolumeUInt16::calcPos(volume->getDimensions(), tgt::svec3(iX, iY, iZ));
 
-				// Setting the unique identifier as the voxelIndex
-				_data->at(i).voxelIndex = i;
+		// Setting the unique identifier as the voxelIndex
+		_data->at(i).voxelIndex = i;
+                
+
+		// use iX, iY, iZ, i, and the VolumeUInt16::voxel method to derive the measures here
+                //
+
+		//
+		// Intensity
+		//
+		//float intensity = -1.f;
+		
+		// Retrieve the intensity using the 'VolumeUInt16's voxel method
+		float intensity = volume->voxel(i);
+
+		_data->at(i).dataValues[0] = intensity;
+
+		//
+		// Average
+		//
+		float average = 0;
+		int count =0;
+		for(int x=int(iX-1); x<= int(iX+1); x++)
+		{
+		  if(x<0) {
+		    x++;
+		  } 
+		  if (x > int(dimensions.x)-1) {
+		    break;
+		  }
+		  for(int y=int(iY-1); y <= int(iY+1); y++)
+		  {
+		    if(y<0) {
+		      y++;
+		    }
+		    if (y > int(dimensions.y)-1) {
+		      break;
+		    }
+		    for(int z=int(iZ-1); z<=int(iZ+1); z++) 
+		    {      
+		      if (z > int(dimensions.z)-1) {
+			break;
+		      }
+		      if(z<0) {
+			z++;
+		      }
+		      average += volume->voxel(x,y,z);
+		      count++;
+		    }
+		  }
+		}
+		
+		//average = average - (2 * intensity);
+		average = average/count;
+	
+		//float average = -1.f;
+		// Compute the average; the voxel method accepts both a single parameter
+		// as well as three parameters
+		
+		_data->at(i).dataValues[1] = average;
+
+		//
+		// Standard deviation
+		//
+		//float stdDeviation = -1.f;	
+		float stdDeviation =0;	
+		int dcount = -1;		
+		
+		for(int x=int(iX-1); x<=int(iX+1); x++)
+		{
+		
+		if(x<0)
+		{
+		x++;
+		}
+		
+		if (x>int(dimensions.x)-1)
+		{
+		
+		break;
+		}
+				for(int y=int(iY-1); y<=int(iY+1); y++)
+				{
+		
+	
+			if(y<0)
+		{
+		y++;
+		}
+		
+		if (y>int(dimensions.y)-1)
+		{
+		
+		break;
+		}
+		
+					for(int z=int(iZ-1); z<=int(iZ+1); z++)
+					{
+					
+					
+					
 				
-				//
-				// use iX, iY, iZ, i, and the VolumeUInt16::voxel method to derive the measures here
-				//
-				//volume->voxel(ix,iy,iz)
-				//
-				// Intensity
-				//
-				//float intensity = -1.f;
-				// Retrieve the intensity using the 'VolumeUInt16's voxel method
-				float intensity = volume->voxel(iX,iY,iZ);
+		if (z>int(dimensions.z)-1)
+		{
+	
 
-				_data->at(i).dataValues[0] = intensity;
-
-				//
-				// Average
-				//
-				
-				
-				float average = 0.0;
-				int counter = 0;
-
-				for(int z = -1; z < 2; z++){
-				    for(int y = -1; y < 2; y++){
-					for(int x = -1; x < 2; x++){
-					    if( (iX > 0 && iX < dimensions.x) && (iY > 0 && iY < dimensions.y) && (iZ > 0 && iZ < dimensions.z) ){
-					      
-						average += volume->voxel(iX+x, iY+y, iZ+z);
-						counter++;
-					    }
+		break;
+		}
+		
+		if(z<0)
+		{
+		z++;
+		}
+		
+	
+					
+			
+					
+						stdDeviation += pow(volume->voxel(x,y,z) - average,2);
+						
+	
+						dcount++;
+					
+						
+					
+					
+		
+		
+		
 					}
-				    }
+		
+		
 				}
-				
-
-				// Compute the average; the voxel method accepts both a single parameter
-				// as well as three parameters
-
-				_data->at(i).dataValues[1] = average/counter;
-
-				//
-				// Standard deviation
-				//
-				float stdDeviation = -1.f;
-				// Compute the standard deviation
+		
+		
+		}
+		
+		
+		stdDeviation = sqrt(stdDeviation/dcount); 
+		
+		stdDeviation = -1.f;
+		// Compute the standard deviation
 
 
-				_data->at(i).dataValues[2] = stdDeviation;
+		_data->at(i).dataValues[2] = stdDeviation;
 
-				//
-				// Gradient magnitude
-				//
-				float gradientMagnitude = -1.f;
-				// Compute the gradient direction using either forward, central, or backward
-				// calculation and then take the magnitude (=length) of the vector.
-				// Hint:  tgt::vec3 is a class that can calculate the length for you
+		//
+		// Gradient magnitude
+		//
+		float gradientMagnitude = -1.f;
+		// Compute the gradient direction using either forward, central, or backward
+		// calculation and then take the magnitude (=length) of the vector.
+		// Hint:  tgt::vec3 is a class that can calculate the length for you
 
 
-				_data->at(i).dataValues[3] = gradientMagnitude;
+		_data->at(i).dataValues[3] = gradientMagnitude;
             }
         }
     }
