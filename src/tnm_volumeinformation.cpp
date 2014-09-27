@@ -196,7 +196,7 @@ void TNMVolumeInformation::process() {
 		
 		stdDeviation = sqrt(stdDeviation/dcount); 
 		
-		stdDeviation = -1.f;
+		//stdDeviation = -1.f;
 		// Compute the standard deviation
 
 
