@@ -6,11 +6,14 @@ git config --global user.email johno855@student.liu.se
 -----------------------------------------------------
 
 
-Compile:
+#Compile:
 /tmp/voreen-tnm093
 
 qmake
 
 make -j8
+
+#start Voreen:
+start_voreenve.sh 
 
 
