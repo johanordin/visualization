@@ -3,17 +3,22 @@
     <Workspace version="2" GlobalDescription="">
         <VolumeContainer>
             <VolumeHandles>
-                <VolumeHandle id="ref45">
+                <VolumeHandle id="ref14">
                     <Origin url="../../../data/volumes/walnut.dat?timeframe=0" />
                 </VolumeHandle>
             </VolumeHandles>
         </VolumeContainer>
         <ProcessorNetwork version="11">
             <MetaData>
+                <MetaItem name="ProcessorSelection" type="SelectionMetaData::Processor">
+                    <values>
+                        <item type="TNMParallelCoordinates" ref="ref2" />
+                    </values>
+                </MetaItem>
                 <MetaItem name="Zoom" type="ZoomMetaData">
-                    <transform.row0 x="0.56250005960464478" y="0" z="0" />
-                    <transform.row1 x="0" y="0.56250005960464478" z="0" />
-                    <transform.row2 x="286.97796630859375" y="144.38754272460937" z="1" />
+                    <transform.row0 x="1.4174114465713501" y="0" z="0" />
+                    <transform.row1 x="0" y="1.4174114465713501" z="0" />
+                    <transform.row2 x="339.0924072265625" y="126.21071624755859375" z="1" />
                 </MetaItem>
             </MetaData>
             <Processors>
@@ -22,44 +27,29 @@
                         <MetaItem name="ProcessorGraphicsItem" type="PositionMetaData" x="-150" y="176" />
                     </MetaData>
                     <Properties>
-                        <Property name="angle" type="IntegerProperty" guiName="Angle" value="0" minValue="0" maxValue="359" />
-                        <Property name="backgroundModeAsString" type="StringOptionProperty" guiName="Type" value="monochrome">
-                            <keys>
-                                <item value="none" />
-                                <item value="monochrome" />
-                                <item value="gradient" />
-                                <item value="radial" />
-                                <item value="texture" />
-                                <item value="cloud" />
-                            </keys>
-                        </Property>
-                        <Property name="color1" type="FloatVec4Property" guiName="First Color">
+                        <Property name="angle" value="0" />
+                        <Property name="backgroundModeAsString" value="monochrome" />
+                        <Property name="color1">
                             <value x="0" y="0" z="0" w="1" />
-                            <minValue x="0" y="0" z="0" w="0" />
-                            <maxValue x="1" y="1" z="1" w="1" />
                         </Property>
-                        <Property name="color2" type="FloatVec4Property" guiName="Second Color">
+                        <Property name="color2">
                             <value x="0.2" y="0.2" z="0.2" w="1" />
-                            <minValue x="0" y="0" z="0" w="0" />
-                            <maxValue x="1" y="1" z="1" w="1" />
                         </Property>
-                        <Property name="repeat" type="FloatProperty" guiName="Repeat Background" value="1" minValue="0" maxValue="100" />
-                        <Property name="texture" type="FileDialogProperty" guiName="Texture" value="" />
+                        <Property name="repeat" value="1" />
+                        <Property name="texture" value="" />
                     </Properties>
                     <InteractionHandlers />
                 </Processor>
                 <Processor type="Canvas" name="Canvas" id="ref1">
                     <MetaData>
                         <MetaItem name="ProcessorGraphicsItem" type="PositionMetaData" x="-150" y="261" />
-                        <MetaItem name="ProcessorWidget" type="WindowStateMetaData" visible="true" x="113" y="281" width="536" height="525" />
+                        <MetaItem name="ProcessorWidget" type="WindowStateMetaData" visible="true" x="353" y="365" width="699" height="684" />
                     </MetaData>
                     <Properties>
-                        <Property name="canvasSize" type="IntVec2Property" guiName="Canvas Size">
-                            <value x="536" y="525" />
-                            <minValue x="32" y="32" />
-                            <maxValue x="16384" y="16384" />
+                        <Property name="canvasSize">
+                            <value x="699" y="684" />
                         </Property>
-                        <Property name="showCursor" type="BoolProperty" guiName="Show Cursor" value="true" />
+                        <Property name="showCursor" value="true" />
                     </Properties>
                     <InteractionHandlers />
                 </Processor>
@@ -68,11 +58,11 @@
                         <MetaItem name="ProcessorGraphicsItem" type="PositionMetaData" x="-313" y="-72" />
                     </MetaData>
                     <Properties>
-                        <Property name="brushingIndices" guiName="Brushing Indices" id="ref43" />
-                        <Property name="linkingIndices" guiName="Linking Indices" id="ref41" />
-                        <Property name="mouse.click" guiName="Mouse Click" lod="1" enabled="true" mouseAction="6" mouseButtons="1" keyCode="0" modifier="0" shareEvents="false" />
-                        <Property name="mouse.move" guiName="Mouse Move" lod="1" enabled="true" mouseAction="1" mouseButtons="1" keyCode="0" modifier="0" shareEvents="false" />
-                        <Property name="mouse.release" guiName="Mouse Release" lod="1" enabled="true" mouseAction="4" mouseButtons="1" keyCode="0" modifier="0" shareEvents="false" />
+                        <Property name="brushingIndices" id="ref44" />
+                        <Property name="linkingIndices" id="ref42" />
+                        <Property name="mouse.click" lod="1" enabled="true" mouseAction="6" mouseButtons="1" keyCode="0" modifier="0" shareEvents="false" />
+                        <Property name="mouse.move" lod="1" enabled="true" mouseAction="1" mouseButtons="1" keyCode="0" modifier="0" shareEvents="false" />
+                        <Property name="mouse.release" lod="1" enabled="true" mouseAction="4" mouseButtons="1" keyCode="0" modifier="0" shareEvents="false" />
                     </Properties>
                     <InteractionHandlers />
                 </Processor>
@@ -81,24 +71,10 @@
                         <MetaItem name="ProcessorGraphicsItem" type="PositionMetaData" x="-134" y="-73" />
                     </MetaData>
                     <Properties>
-                        <Property name="brushingIndices" guiName="Brushing Indices" id="ref44" />
-                        <Property name="firstAxis" type="IntOptionProperty" guiName="First Axis" value="0">
-                            <keys>
-                                <item value="0" />
-                                <item value="1" />
-                                <item value="2" />
-                                <item value="3" />
-                            </keys>
-                        </Property>
-                        <Property name="linkingIndices" guiName="Linking Indices" id="ref42" />
-                        <Property name="secondAxis" type="IntOptionProperty" guiName="Second Axis" value="0">
-                            <keys>
-                                <item value="0" />
-                                <item value="1" />
-                                <item value="2" />
-                                <item value="3" />
-                            </keys>
-                        </Property>
+                        <Property name="brushingIndices" id="ref45" />
+                        <Property name="firstAxis" value="1" />
+                        <Property name="linkingIndices" id="ref43" />
+                        <Property name="secondAxis" value="3" />
                     </Properties>
                     <InteractionHandlers />
                 </Processor>
@@ -114,8 +90,8 @@
                         <MetaItem name="ProcessorGraphicsItem" type="PositionMetaData" x="-208" y="-511" />
                     </MetaData>
                     <Properties>
-                        <Property name="volumeHandle" type="VolumeHandleProperty" guiName="Volume">
-                            <value ref="ref45" />
+                        <Property name="volumeHandle">
+                            <value ref="ref14" />
                         </Property>
                     </Properties>
                     <InteractionHandlers />
@@ -125,39 +101,34 @@
                         <MetaItem name="ProcessorGraphicsItem" type="PositionMetaData" x="56" y="-302" />
                     </MetaData>
                     <Properties>
-                        <Property name="camera" type="CameraProperty" guiName="Camera" adjustProjectionToViewport="true" projectionMode="1" frustLeft="-0.04142136" frustRight="0.04142136" frustBottom="-0.04142136" frustTop="0.04142136" frustNear="0.1" frustFar="50" fovy="45" id="ref14">
+                        <Property name="camera" adjustProjectionToViewport="true" projectionMode="1" frustLeft="-0.04142136" frustRight="0.04142136" frustBottom="-0.04142136" frustTop="0.04142136" frustNear="0.1" frustFar="50" fovy="45" id="ref15">
                             <MetaData>
                                 <MetaItem name="EditorWindow" type="WindowStateMetaData" visible="false" x="751" y="417" />
                             </MetaData>
-                            <position x="0.43307778" y="-0.28026849" z="-2.46672463" />
+                            <position x="2.48959923" y="-0.18013385" z="0.34682757" />
                             <focus x="0" y="0" z="0" />
-                            <upVector x="0.2082137" y="0.97526085" z="-0.07425247" />
+                            <upVector x="0.06493869" y="0.99656254" z="0.05144007" />
                         </Property>
-                        <Property name="jitterEntryPoints" type="BoolProperty" guiName="Jitter entry params" value="false" />
-                        <Property name="jitterStepLength" type="FloatProperty" guiName="Jitter step length" value="0.005" minValue="0.0005" maxValue="0.025" />
-                        <Property name="supportCameraInsideVolume" type="BoolProperty" guiName="Support camera in volume" value="true" />
-                        <Property name="useCulling" type="BoolProperty" guiName="Use culling" value="true" />
-                        <Property name="useFloatRenderTargets" type="BoolProperty" guiName="Use float render targets" value="false" />
+                        <Property name="jitterEntryPoints" value="false" />
+                        <Property name="jitterStepLength" value="0.005" />
+                        <Property name="supportCameraInsideVolume" value="true" />
+                        <Property name="useCulling" value="true" />
+                        <Property name="useFloatRenderTargets" value="false" />
                     </Properties>
                     <InteractionHandlers>
                         <Handler name="cameraHandler">
                             <Properties>
-                                <Property name="cameraHandler.interactionMetaphor" guiName="Camera Interaction" value="trackball">
-                                    <keys>
-                                        <item value="trackball" />
-                                        <item value="first-person" />
-                                    </keys>
-                                </Property>
-                                <Property name="cameraHandler.moveBackward" guiName="Camera Move Backward" lod="1" enabled="true" mouseAction="0" mouseButtons="0" keyCode="115" modifier="0" shareEvents="false" />
-                                <Property name="cameraHandler.moveDown" guiName="Camera Move Down" lod="1" enabled="true" mouseAction="0" mouseButtons="0" keyCode="102" modifier="0" shareEvents="false" />
-                                <Property name="cameraHandler.moveForward" guiName="Camera Move Forward" lod="1" enabled="true" mouseAction="0" mouseButtons="0" keyCode="119" modifier="0" shareEvents="false" />
-                                <Property name="cameraHandler.moveLeft" guiName="Camera Move Left" lod="1" enabled="true" mouseAction="0" mouseButtons="0" keyCode="97" modifier="0" shareEvents="false" />
-                                <Property name="cameraHandler.moveRight" guiName="Camera Move Right" lod="1" enabled="true" mouseAction="0" mouseButtons="0" keyCode="100" modifier="0" shareEvents="false" />
-                                <Property name="cameraHandler.moveUp" guiName="Camera Move Up" lod="1" enabled="true" mouseAction="0" mouseButtons="0" keyCode="114" modifier="0" shareEvents="false" />
-                                <Property name="cameraHandler.rotate" guiName="Camera Rotate" lod="1" enabled="true" mouseAction="127" mouseButtons="1" keyCode="0" modifier="0" shareEvents="false" />
-                                <Property name="cameraHandler.shift" guiName="Camera Shift" lod="1" enabled="true" mouseAction="127" mouseButtons="1" keyCode="0" modifier="1" shareEvents="false" />
-                                <Property name="cameraHandler.wheelZoom" guiName="Camera Wheel Zoom" lod="1" enabled="true" mouseAction="16" mouseButtons="96" keyCode="0" modifier="0" shareEvents="false" />
-                                <Property name="cameraHandler.zoom" guiName="Camera Zoom" lod="1" enabled="true" mouseAction="127" mouseButtons="4" keyCode="0" modifier="0" shareEvents="false" />
+                                <Property name="cameraHandler.interactionMetaphor" value="trackball" />
+                                <Property name="cameraHandler.moveBackward" lod="1" enabled="true" mouseAction="0" mouseButtons="0" keyCode="115" modifier="0" shareEvents="false" />
+                                <Property name="cameraHandler.moveDown" lod="1" enabled="true" mouseAction="0" mouseButtons="0" keyCode="102" modifier="0" shareEvents="false" />
+                                <Property name="cameraHandler.moveForward" lod="1" enabled="true" mouseAction="0" mouseButtons="0" keyCode="119" modifier="0" shareEvents="false" />
+                                <Property name="cameraHandler.moveLeft" lod="1" enabled="true" mouseAction="0" mouseButtons="0" keyCode="97" modifier="0" shareEvents="false" />
+                                <Property name="cameraHandler.moveRight" lod="1" enabled="true" mouseAction="0" mouseButtons="0" keyCode="100" modifier="0" shareEvents="false" />
+                                <Property name="cameraHandler.moveUp" lod="1" enabled="true" mouseAction="0" mouseButtons="0" keyCode="114" modifier="0" shareEvents="false" />
+                                <Property name="cameraHandler.rotate" lod="1" enabled="true" mouseAction="127" mouseButtons="1" keyCode="0" modifier="0" shareEvents="false" />
+                                <Property name="cameraHandler.shift" lod="1" enabled="true" mouseAction="127" mouseButtons="1" keyCode="0" modifier="1" shareEvents="false" />
+                                <Property name="cameraHandler.wheelZoom" lod="1" enabled="true" mouseAction="16" mouseButtons="96" keyCode="0" modifier="0" shareEvents="false" />
+                                <Property name="cameraHandler.zoom" lod="1" enabled="true" mouseAction="127" mouseButtons="4" keyCode="0" modifier="0" shareEvents="false" />
                             </Properties>
                         </Handler>
                     </InteractionHandlers>
@@ -167,14 +138,14 @@
                         <MetaItem name="ProcessorGraphicsItem" type="PositionMetaData" x="42" y="-416" />
                     </MetaData>
                     <Properties>
-                        <Property name="backClippingPlane" type="FloatProperty" guiName="Back Clip Plane (y)" value="95" minValue="0" maxValue="95" />
-                        <Property name="bottomClippingPlane" type="FloatProperty" guiName="Bottom Clip Plane (z)" value="0" minValue="0" maxValue="113" />
-                        <Property name="frontClippingPlane" type="FloatProperty" guiName="Front Clip Plane (y)" value="0" minValue="0" maxValue="95" />
-                        <Property name="leftClippingPlane" type="FloatProperty" guiName="Left Clip Plane (x)" value="127" minValue="0" maxValue="127" />
-                        <Property name="resetClipPlanes" type="ButtonProperty" guiName="Reset Planes" />
-                        <Property name="rightClippingPlane" type="FloatProperty" guiName="Right Clip Plane (x)" value="0" minValue="0" maxValue="127" />
-                        <Property name="topClippingPlane" type="FloatProperty" guiName="Top Clip Plane (z)" value="113" minValue="0" maxValue="113" />
-                        <Property name="useClipping" type="BoolProperty" guiName="Enable Clipping" value="true" />
+                        <Property name="backClippingPlane" value="95" />
+                        <Property name="bottomClippingPlane" value="0" />
+                        <Property name="frontClippingPlane" value="0" />
+                        <Property name="leftClippingPlane" value="127" />
+                        <Property name="resetClipPlanes" />
+                        <Property name="rightClippingPlane" value="0" />
+                        <Property name="topClippingPlane" value="113" />
+                        <Property name="useClipping" value="true" />
                     </Properties>
                     <InteractionHandlers />
                 </Processor>
@@ -183,16 +154,14 @@
                         <MetaItem name="ProcessorGraphicsItem" type="PositionMetaData" x="-150" y="93" />
                     </MetaData>
                     <Properties>
-                        <Property name="gridColor" type="FloatVec4Property" guiName="Grid color">
+                        <Property name="gridColor">
                             <value x="1" y="1" z="1" w="1" />
-                            <minValue x="0" y="0" z="0" w="0" />
-                            <maxValue x="1" y="1" z="1" w="1" />
                         </Property>
-                        <Property name="maximizeOnDoubleClick" type="BoolProperty" guiName="Maximize on double click" value="true" />
-                        <Property name="maximized" type="IntegerProperty" guiName="Maximized sub-view" value="0" minValue="0" maxValue="4" />
-                        <Property name="mouseEvent.maximize" guiName="Maximize Event" lod="1" enabled="true" mouseAction="8" mouseButtons="1" keyCode="0" modifier="0" shareEvents="false" />
-                        <Property name="mouseEvent.move" guiName="Move Event" lod="1" enabled="true" mouseAction="103" mouseButtons="0" keyCode="0" modifier="0" shareEvents="false" />
-                        <Property name="showGrid" type="BoolProperty" guiName="Show grid" value="true" />
+                        <Property name="maximizeOnDoubleClick" value="true" />
+                        <Property name="maximized" value="0" />
+                        <Property name="mouseEvent.maximize" lod="1" enabled="true" mouseAction="8" mouseButtons="1" keyCode="0" modifier="0" shareEvents="false" />
+                        <Property name="mouseEvent.move" lod="1" enabled="true" mouseAction="103" mouseButtons="0" keyCode="0" modifier="0" shareEvents="false" />
+                        <Property name="showGrid" value="true" />
                     </Properties>
                     <InteractionHandlers />
                 </Processor>
@@ -201,75 +170,35 @@
                         <MetaItem name="ProcessorGraphicsItem" type="PositionMetaData" x="-428" y="-73" />
                     </MetaData>
                     <Properties>
-                        <Property name="applyColorModulation" type="BoolProperty" guiName="Apply color modulation" value="false" />
-                        <Property name="boundaryColor" type="FloatVec4Property" guiName="Boundary Color">
+                        <Property name="applyColorModulation" value="false" />
+                        <Property name="boundaryColor">
                             <value x="1" y="1" z="1" w="1" />
-                            <minValue x="0" y="0" z="0" w="0" />
-                            <maxValue x="1" y="1" z="1" w="1" />
                         </Property>
-                        <Property name="fontSize" type="IntegerProperty" guiName="Font Size" value="14" minValue="8" maxValue="48" />
-                        <Property name="mouseEvent.Shift" guiName="Slice Shift" lod="1" enabled="true" mouseAction="3" mouseButtons="1" keyCode="0" modifier="2" shareEvents="false" />
-                        <Property name="mouseEvent.cursorPositionMove" guiName="Cursor Position Move" lod="1" enabled="true" mouseAction="1" mouseButtons="0" keyCode="0" modifier="0" shareEvents="true" />
-                        <Property name="mouseEvent.cursorPositionPress" guiName="Cursor Position Press" lod="1" enabled="true" mouseAction="19" mouseButtons="3" keyCode="0" modifier="0" shareEvents="true" />
-                        <Property name="mousePositionProperty" type="FloatVec3Property" guiName="Mouse Position">
+                        <Property name="fontSize" value="14" />
+                        <Property name="mouseEvent.Shift" lod="1" enabled="true" mouseAction="3" mouseButtons="1" keyCode="0" modifier="2" shareEvents="false" />
+                        <Property name="mouseEvent.cursorPositionMove" lod="1" enabled="true" mouseAction="1" mouseButtons="0" keyCode="0" modifier="0" shareEvents="true" />
+                        <Property name="mouseEvent.cursorPositionPress" lod="1" enabled="true" mouseAction="19" mouseButtons="3" keyCode="0" modifier="0" shareEvents="true" />
+                        <Property name="mousePositionProperty">
                             <value x="-1" y="-1" z="-1" />
-                            <minValue x="-1" y="-1" z="-1" />
-                            <maxValue x="1" y="1" z="1" />
                         </Property>
-                        <Property name="numSlicesPerCol" type="IntegerProperty" guiName="Num Columns" value="1" minValue="1" maxValue="114" />
-                        <Property name="numSlicesPerRow" type="IntegerProperty" guiName="Num Rows" value="1" minValue="1" maxValue="114" />
-                        <Property name="pickingMatrix" type="FloatMat4Property" guiName="Picking Matrix">
+                        <Property name="numSlicesPerCol" value="1" />
+                        <Property name="numSlicesPerRow" value="1" />
+                        <Property name="pickingMatrix">
                             <value.row0 x="1" y="0" z="0" w="0" />
                             <value.row1 x="0" y="1" z="0" w="0" />
                             <value.row2 x="0" y="0" z="1" w="0" />
                             <value.row3 x="0" y="0" z="0" w="1" />
-                            <minValue.row0 x="-1000000" y="-1000000" z="-1000000" w="-1000000" />
-                            <minValue.row1 x="-1000000" y="-1000000" z="-1000000" w="-1000000" />
-                            <minValue.row2 x="-1000000" y="-1000000" z="-1000000" w="-1000000" />
-                            <minValue.row3 x="-1000000" y="-1000000" z="-1000000" w="-1000000" />
-                            <maxValue.row0 x="1000000" y="1000000" z="1000000" w="1000000" />
-                            <maxValue.row1 x="1000000" y="1000000" z="1000000" w="1000000" />
-                            <maxValue.row2 x="1000000" y="1000000" z="1000000" w="1000000" />
-                            <maxValue.row3 x="1000000" y="1000000" z="1000000" w="1000000" />
                         </Property>
-                        <Property name="renderSliceBoundaries" type="BoolProperty" guiName="Render Slice Boundaries" value="false" />
-                        <Property name="showCursorInformation" type="StringOptionProperty" guiName="Show Cursor Information" value="onMove">
-                            <keys>
-                                <item value="never" />
-                                <item value="onClick" />
-                                <item value="onMove" />
-                            </keys>
-                        </Property>
-                        <Property name="showSliceNumber" type="BoolProperty" guiName="Show Slice Number" value="true" />
-                        <Property name="sliceAlignmentProp" guiName="Slice Alignment" value="xy-plane">
-                            <keys>
-                                <item value="xy-plane" />
-                                <item value="xz-plane" />
-                                <item value="yz-plane" />
-                            </keys>
-                        </Property>
-                        <Property name="sliceIndex" type="IntegerProperty" guiName="Slice Number " value="51" minValue="0" maxValue="113" />
-                        <Property name="textureBorderIntensity" type="FloatProperty" guiName="Texture Border Intensity" value="0" minValue="0" maxValue="1" />
-                        <Property name="textureClampMode_" type="GLEnumOptionProperty" guiName="Texture Clamp" value="clamp-to-edge">
-                            <keys>
-                                <item value="clamp" />
-                                <item value="clamp-to-edge" />
-                                <item value="clamp-to-border" />
-                            </keys>
-                        </Property>
-                        <Property name="textureFilterMode" type="IntOptionProperty" guiName="Texture Filtering" value="linear">
-                            <keys>
-                                <item value="nearest" />
-                                <item value="linear" />
-                            </keys>
-                        </Property>
-                        <Property name="textureMode" guiName="Texture Mode" value="3d-texture">
-                            <keys>
-                                <item value="2d-texture" />
-                                <item value="3d-texture" />
-                            </keys>
-                        </Property>
-                        <Property name="transferFunction" type="TransFuncProperty" guiName="Transfer Function">
+                        <Property name="renderSliceBoundaries" value="false" />
+                        <Property name="showCursorInformation" value="onMove" />
+                        <Property name="showSliceNumber" value="true" />
+                        <Property name="sliceAlignmentProp" value="xy-plane" />
+                        <Property name="sliceIndex" value="51" />
+                        <Property name="textureBorderIntensity" value="0" />
+                        <Property name="textureClampMode_" value="clamp-to-edge" />
+                        <Property name="textureFilterMode" value="linear" />
+                        <Property name="textureMode" value="3d-texture" />
+                        <Property name="transferFunction">
                             <MetaData>
                                 <MetaItem name="EditorWindow" type="WindowStateMetaData" visible="false" />
                             </MetaData>
@@ -285,22 +214,20 @@
                                 <domain x="0" y="1" />
                             </TransferFunction>
                         </Property>
-                        <Property name="voxelOffset" type="FloatVec2Property" guiName="Voxel Offset">
+                        <Property name="voxelOffset">
                             <value x="0" y="0" />
-                            <minValue x="-64" y="-47.5" />
-                            <maxValue x="64" y="47.5" />
                         </Property>
-                        <Property name="zoomFactor" type="FloatProperty" guiName="Zoom Factor" value="1" minValue="0.01" maxValue="1.20000005" />
+                        <Property name="zoomFactor" value="1" />
                     </Properties>
                     <InteractionHandlers>
                         <Handler name="mouseWheelHandler">
                             <Properties>
-                                <Property name="mouseWheelHandler" guiName="Slice Cycling" lod="1" enabled="true" mouseAction="23" mouseButtons="98" keyCode="0" modifier="0" shareEvents="false" />
+                                <Property name="mouseWheelHandler" lod="1" enabled="true" mouseAction="23" mouseButtons="98" keyCode="0" modifier="0" shareEvents="false" />
                             </Properties>
                         </Handler>
                         <Handler name="zoomHandler">
                             <Properties>
-                                <Property name="zoomHandler" guiName="Slice Zoom" lod="1" enabled="true" mouseAction="23" mouseButtons="98" keyCode="0" modifier="2" shareEvents="false" />
+                                <Property name="zoomHandler" lod="1" enabled="true" mouseAction="23" mouseButtons="98" keyCode="0" modifier="2" shareEvents="false" />
                             </Properties>
                         </Handler>
                     </InteractionHandlers>
@@ -310,50 +237,40 @@
                         <MetaItem name="ProcessorGraphicsItem" type="PositionMetaData" x="-2" y="-72" />
                     </MetaData>
                     <Properties>
-                        <Property name="applyLightAttenuation" type="BoolProperty" guiName="Apply Attenuation" value="false" id="ref33" />
-                        <Property name="camera" type="CameraProperty" guiName="Camera" adjustProjectionToViewport="true" projectionMode="1" frustLeft="-0.04142136" frustRight="0.04142136" frustBottom="-0.04142136" frustTop="0.04142136" frustNear="0.1" frustFar="50" fovy="45" id="ref15">
+                        <Property name="applyLightAttenuation" value="false" id="ref34" />
+                        <Property name="camera" adjustProjectionToViewport="true" projectionMode="1" frustLeft="-0.04142136" frustRight="0.04142136" frustBottom="-0.04142136" frustTop="0.04142136" frustNear="0.1" frustFar="50" fovy="45" id="ref16">
                             <MetaData>
                                 <MetaItem name="EditorWindow" type="WindowStateMetaData" visible="false" x="751" y="417" />
                             </MetaData>
-                            <position x="0.43307778" y="-0.28026849" z="-2.46672463" />
+                            <position x="2.48959923" y="-0.18013385" z="0.34682757" />
                             <focus x="0" y="0" z="0" />
-                            <upVector x="0.2082137" y="0.97526085" z="-0.07425247" />
+                            <upVector x="0.06493869" y="0.99656254" z="0.05144007" />
                         </Property>
-                        <Property name="interactionCoarseness" type="IntegerProperty" guiName="Interaction Coarseness" value="4" minValue="1" maxValue="16" id="ref21" />
-                        <Property name="interactionQuality" type="FloatProperty" guiName="Interaction Quality" value="1" minValue="0.01" maxValue="1" id="ref39" />
-                        <Property name="interpolation.coarseness" type="BoolProperty" guiName="Use Interpolation Coarseness" value="false" id="ref27" />
-                        <Property name="lightAmbient" type="FloatVec4Property" guiName="Ambient Light" id="ref35">
+                        <Property name="interactionCoarseness" value="4" id="ref22" />
+                        <Property name="interactionQuality" value="1" id="ref40" />
+                        <Property name="interpolation.coarseness" value="false" id="ref28" />
+                        <Property name="lightAmbient" id="ref36">
                             <value x="0.40000001" y="0.40000001" z="0.40000001" w="1" />
-                            <minValue x="0" y="0" z="0" w="0" />
-                            <maxValue x="1" y="1" z="1" w="1" />
                         </Property>
-                        <Property name="lightAttenuation" type="FloatVec3Property" guiName="Attenuation" id="ref19">
+                        <Property name="lightAttenuation" id="ref20">
                             <value x="1" y="0" z="0" />
-                            <minValue x="0" y="0" z="0" />
-                            <maxValue x="1" y="1" z="1" />
                         </Property>
-                        <Property name="lightDiffuse" type="FloatVec4Property" guiName="Diffuse Light" id="ref37">
+                        <Property name="lightDiffuse" id="ref38">
                             <value x="0.80000001" y="0.80000001" z="0.80000001" w="1" />
-                            <minValue x="0" y="0" z="0" w="0" />
-                            <maxValue x="1" y="1" z="1" w="1" />
                         </Property>
-                        <Property name="lightPosition" type="FloatVec4Property" guiName="Light Source Position" id="ref29">
+                        <Property name="lightPosition" id="ref30">
                             <MetaData>
                                 <MetaItem name="FollowCamera" type="BoolMetaData" value="true" />
                                 <MetaItem name="UseBackHemisphere" type="BoolMetaData" value="false" />
                             </MetaData>
                             <value x="1.70274329" y="0.23951304" z="-2.61405778" w="0" />
-                            <minValue x="-10" y="-10" z="-10" w="-10" />
-                            <maxValue x="10" y="10" z="10" w="10" />
                         </Property>
-                        <Property name="lightSpecular" type="FloatVec4Property" guiName="Specular Light" id="ref17">
+                        <Property name="lightSpecular" id="ref18">
                             <value x="0.60000002" y="0.60000002" z="0.60000002" w="1" />
-                            <minValue x="0" y="0" z="0" w="0" />
-                            <maxValue x="1" y="1" z="1" w="1" />
                         </Property>
-                        <Property name="materialShininess" type="FloatProperty" guiName="Shininess" value="60" minValue="0.1" maxValue="128" id="ref31" />
-                        <Property name="samplingRate" type="FloatProperty" guiName="Sampling Rate" value="9.03999996" minValue="0.01" maxValue="20" id="ref25" />
-                        <Property name="transferFunction" type="TransFuncProperty" guiName="Transfer Function" id="ref23">
+                        <Property name="materialShininess" value="60" id="ref32" />
+                        <Property name="samplingRate" value="9.03999996" id="ref26" />
+                        <Property name="transferFunction" id="ref24">
                             <MetaData>
                                 <MetaItem name="EditorWindow" type="WindowStateMetaData" visible="false" />
                             </MetaData>
@@ -383,7 +300,7 @@
                         <MetaItem name="ProcessorGraphicsItem" type="PositionMetaData" x="-522" y="-299" />
                     </MetaData>
                     <Properties>
-                        <Property name="percentage" type="FloatProperty" guiName="Percentage of Dropped Data" value="0" minValue="0" maxValue="1" />
+                        <Property name="percentage" value="0" />
                     </Properties>
                     <InteractionHandlers />
                 </Processor>
@@ -392,123 +309,53 @@
                         <MetaItem name="ProcessorGraphicsItem" type="PositionMetaData" x="179" y="-72" />
                     </MetaData>
                     <Properties>
-                        <Property name="applyLightAttenuation" type="BoolProperty" guiName="Apply Attenuation" value="false" id="ref34" />
-                        <Property name="camera" type="CameraProperty" guiName="Camera" adjustProjectionToViewport="true" projectionMode="1" frustLeft="-0.04142136" frustRight="0.04142136" frustBottom="-0.04142136" frustTop="0.04142136" frustNear="0.1" frustFar="50" fovy="45" id="ref16">
+                        <Property name="applyLightAttenuation" value="false" id="ref35" />
+                        <Property name="camera" adjustProjectionToViewport="true" projectionMode="1" frustLeft="-0.04142136" frustRight="0.04142136" frustBottom="-0.04142136" frustTop="0.04142136" frustNear="0.1" frustFar="50" fovy="45" id="ref17">
                             <MetaData>
                                 <MetaItem name="EditorWindow" type="WindowStateMetaData" visible="false" x="751" y="417" />
                             </MetaData>
-                            <position x="0.43307778" y="-0.28026849" z="-2.46672463" />
+                            <position x="2.48959923" y="-0.18013385" z="0.34682757" />
                             <focus x="0" y="0" z="0" />
-                            <upVector x="0.2082137" y="0.97526085" z="-0.07425247" />
+                            <upVector x="0.06493869" y="0.99656254" z="0.05144007" />
                         </Property>
-                        <Property name="classification" type="StringOptionProperty" guiName="Classification" value="transfer-function">
-                            <keys>
-                                <item value="none" />
-                                <item value="transfer-function" />
-                            </keys>
-                        </Property>
-                        <Property name="compositing" type="StringOptionProperty" guiName="Compositing" value="dvr">
-                            <keys>
-                                <item value="dvr" />
-                                <item value="mip" />
-                                <item value="mida" />
-                                <item value="iso" />
-                                <item value="fhp" />
-                                <item value="fhn" />
-                            </keys>
-                        </Property>
-                        <Property name="compositing1" type="StringOptionProperty" guiName="Compositing (OP2)" value="dvr">
-                            <keys>
-                                <item value="dvr" />
-                                <item value="mip" />
-                                <item value="mida" />
-                                <item value="iso" />
-                                <item value="fhp" />
-                                <item value="fhn" />
-                            </keys>
-                        </Property>
-                        <Property name="compositing2" type="StringOptionProperty" guiName="Compositing (OP3)" value="dvr">
-                            <keys>
-                                <item value="dvr" />
-                                <item value="mip" />
-                                <item value="mida" />
-                                <item value="iso" />
-                                <item value="fhp" />
-                                <item value="fhn" />
-                            </keys>
-                        </Property>
-                        <Property name="gammaValue" type="FloatProperty" guiName="Gamma Value (OP1)" value="0" minValue="-1" maxValue="1" />
-                        <Property name="gammaValue1" type="FloatProperty" guiName="Gamma Value (OP2)" value="0" minValue="-1" maxValue="1" />
-                        <Property name="gammaValue2" type="FloatProperty" guiName="Gamma Value (OP3)" value="0" minValue="-1" maxValue="1" />
-                        <Property name="gradient" type="StringOptionProperty" guiName="Gradient Calculation" value="central-differences">
-                            <keys>
-                                <item value="none" />
-                                <item value="forward-differences" />
-                                <item value="central-differences" />
-                                <item value="filtered" />
-                            </keys>
-                        </Property>
-                        <Property name="interactionCoarseness" type="IntegerProperty" guiName="Interaction Coarseness" value="4" minValue="1" maxValue="16" id="ref22" />
-                        <Property name="interactionQuality" type="FloatProperty" guiName="Interaction Quality" value="1" minValue="0.01" maxValue="1" id="ref40" />
-                        <Property name="interpolation.coarseness" type="BoolProperty" guiName="Use Interpolation Coarseness" value="false" id="ref28" />
-                        <Property name="isoValue" type="FloatProperty" guiName="Iso Value" value="0.5" minValue="0" maxValue="1" />
-                        <Property name="lightAmbient" type="FloatVec4Property" guiName="Ambient Light" id="ref36">
+                        <Property name="classification" value="transfer-function" />
+                        <Property name="compositing" value="dvr" />
+                        <Property name="compositing1" value="dvr" />
+                        <Property name="compositing2" value="dvr" />
+                        <Property name="gammaValue" value="0" />
+                        <Property name="gammaValue1" value="0" />
+                        <Property name="gammaValue2" value="0" />
+                        <Property name="gradient" value="central-differences" />
+                        <Property name="interactionCoarseness" value="4" id="ref23" />
+                        <Property name="interactionQuality" value="1" id="ref41" />
+                        <Property name="interpolation.coarseness" value="false" id="ref29" />
+                        <Property name="isoValue" value="0.5" />
+                        <Property name="lightAmbient" id="ref37">
                             <value x="0.40000001" y="0.40000001" z="0.40000001" w="1" />
-                            <minValue x="0" y="0" z="0" w="0" />
-                            <maxValue x="1" y="1" z="1" w="1" />
                         </Property>
-                        <Property name="lightAttenuation" type="FloatVec3Property" guiName="Attenuation" id="ref20">
+                        <Property name="lightAttenuation" id="ref21">
                             <value x="1" y="0" z="0" />
-                            <minValue x="0" y="0" z="0" />
-                            <maxValue x="1" y="1" z="1" />
                         </Property>
-                        <Property name="lightDiffuse" type="FloatVec4Property" guiName="Diffuse Light" id="ref38">
+                        <Property name="lightDiffuse" id="ref39">
                             <value x="0.80000001" y="0.80000001" z="0.80000001" w="1" />
-                            <minValue x="0" y="0" z="0" w="0" />
-                            <maxValue x="1" y="1" z="1" w="1" />
                         </Property>
-                        <Property name="lightPosition" type="FloatVec4Property" guiName="Light Source Position" id="ref30">
+                        <Property name="lightPosition" id="ref31">
                             <MetaData>
                                 <MetaItem name="FollowCamera" type="BoolMetaData" value="false" />
                                 <MetaItem name="UseBackHemisphere" type="BoolMetaData" value="false" />
                             </MetaData>
                             <value x="1.70274329" y="0.23951304" z="-2.61405778" w="0" />
-                            <minValue x="-10" y="-10" z="-10" w="-10" />
-                            <maxValue x="10" y="10" z="10" w="10" />
                         </Property>
-                        <Property name="lightSpecular" type="FloatVec4Property" guiName="Specular Light" id="ref18">
+                        <Property name="lightSpecular" id="ref19">
                             <value x="0.60000002" y="0.60000002" z="0.60000002" w="1" />
-                            <minValue x="0" y="0" z="0" w="0" />
-                            <maxValue x="1" y="1" z="1" w="1" />
                         </Property>
-                        <Property name="materialShininess" type="FloatProperty" guiName="Shininess" value="60" minValue="0.1" maxValue="128" id="ref32" />
-                        <Property name="samplingRate" type="FloatProperty" guiName="Sampling Rate" value="9.03999996" minValue="0.01" maxValue="20" id="ref26" />
-                        <Property name="shading" type="StringOptionProperty" guiName="Shading" value="phong">
-                            <keys>
-                                <item value="none" />
-                                <item value="phong-diffuse" />
-                                <item value="phong-specular" />
-                                <item value="phong-diffuse-ambient" />
-                                <item value="phong-diffuse-specular" />
-                                <item value="phong" />
-                                <item value="toon" />
-                            </keys>
-                        </Property>
-                        <Property name="textureBorderIntensity" type="FloatProperty" guiName="Texture Border Intensity" value="0" minValue="0" maxValue="1" />
-                        <Property name="textureClampMode_" type="GLEnumOptionProperty" guiName="Texture Clamp" value="clamp-to-edge">
-                            <keys>
-                                <item value="clamp" />
-                                <item value="clamp-to-edge" />
-                                <item value="clamp-to-border" />
-                            </keys>
-                        </Property>
-                        <Property name="textureFilterMode_" type="IntOptionProperty" guiName="Texture Filtering" value="linear">
-                            <keys>
-                                <item value="nearest" />
-                                <item value="linear" />
-                            </keys>
-                        </Property>
-                        <Property name="transferFunction" type="TransFuncProperty" guiName="Transfer Function" id="ref24">
+                        <Property name="materialShininess" value="60" id="ref33" />
+                        <Property name="samplingRate" value="9.03999996" id="ref27" />
+                        <Property name="shading" value="phong" />
+                        <Property name="textureBorderIntensity" value="0" />
+                        <Property name="textureClampMode_" value="clamp-to-edge" />
+                        <Property name="textureFilterMode_" value="linear" />
+                        <Property name="transferFunction" id="ref25">
                             <MetaData>
                                 <MetaItem name="EditorWindow" type="WindowStateMetaData" visible="false" />
                             </MetaData>
@@ -539,12 +386,10 @@
                         <MetaItem name="ProcessorWidget" type="WindowStateMetaData" visible="false" x="608" y="481" width="536" height="525" />
                     </MetaData>
                     <Properties>
-                        <Property name="canvasSize" type="IntVec2Property" guiName="Canvas Size">
+                        <Property name="canvasSize">
                             <value x="536" y="525" />
-                            <minValue x="32" y="32" />
-                            <maxValue x="16384" y="16384" />
                         </Property>
-                        <Property name="showCursor" type="BoolProperty" guiName="Show Cursor" value="true" />
+                        <Property name="showCursor" value="true" />
                     </Properties>
                     <InteractionHandlers />
                 </Processor>
@@ -553,17 +398,8 @@
                         <MetaItem name="ProcessorGraphicsItem" type="PositionMetaData" x="154" y="42" />
                     </MetaData>
                     <Properties>
-                        <Property name="distributeEvents" type="BoolProperty" guiName="Distribute Events" value="true" />
-                        <Property name="scaling" type="IntOptionProperty" guiName="Scaling Mode" value="keep-ratio-all">
-                            <keys>
-                                <item value="brute-force" />
-                                <item value="1:1" />
-                                <item value="keep-ratio-all" />
-                                <item value="keep-ratio-fill" />
-                                <item value="scale-to-height" />
-                                <item value="scale-to-width" />
-                            </keys>
-                        </Property>
+                        <Property name="distributeEvents" value="true" />
+                        <Property name="scaling" value="keep-ratio-all" />
                     </Properties>
                     <InteractionHandlers />
                 </Processor>
@@ -733,173 +569,173 @@
             <CoProcessorConnections />
             <PropertyLinks>
                 <PropertyLink>
-                    <SourceProperty type="CameraProperty" ref="ref14" />
-                    <DestinationProperty type="CameraProperty" ref="ref15" />
-                    <Evaluator type="LinkEvaluatorId" />
-                </PropertyLink>
-                <PropertyLink>
                     <SourceProperty type="CameraProperty" ref="ref15" />
-                    <DestinationProperty type="CameraProperty" ref="ref14" />
-                    <Evaluator type="LinkEvaluatorId" />
-                </PropertyLink>
-                <PropertyLink>
-                    <SourceProperty type="CameraProperty" ref="ref14" />
                     <DestinationProperty type="CameraProperty" ref="ref16" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
                     <SourceProperty type="CameraProperty" ref="ref16" />
-                    <DestinationProperty type="CameraProperty" ref="ref14" />
+                    <DestinationProperty type="CameraProperty" ref="ref15" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
-                    <SourceProperty type="FloatVec4Property" ref="ref17" />
-                    <DestinationProperty type="FloatVec4Property" ref="ref18" />
+                    <SourceProperty type="CameraProperty" ref="ref15" />
+                    <DestinationProperty type="CameraProperty" ref="ref17" />
+                    <Evaluator type="LinkEvaluatorId" />
+                </PropertyLink>
+                <PropertyLink>
+                    <SourceProperty type="CameraProperty" ref="ref17" />
+                    <DestinationProperty type="CameraProperty" ref="ref15" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
                     <SourceProperty type="FloatVec4Property" ref="ref18" />
-                    <DestinationProperty type="FloatVec4Property" ref="ref17" />
+                    <DestinationProperty type="FloatVec4Property" ref="ref19" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
-                    <SourceProperty type="FloatVec3Property" ref="ref19" />
-                    <DestinationProperty type="FloatVec3Property" ref="ref20" />
+                    <SourceProperty type="FloatVec4Property" ref="ref19" />
+                    <DestinationProperty type="FloatVec4Property" ref="ref18" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
                     <SourceProperty type="FloatVec3Property" ref="ref20" />
-                    <DestinationProperty type="FloatVec3Property" ref="ref19" />
+                    <DestinationProperty type="FloatVec3Property" ref="ref21" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
-                    <SourceProperty type="IntegerProperty" ref="ref21" />
-                    <DestinationProperty type="IntegerProperty" ref="ref22" />
+                    <SourceProperty type="FloatVec3Property" ref="ref21" />
+                    <DestinationProperty type="FloatVec3Property" ref="ref20" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
                     <SourceProperty type="IntegerProperty" ref="ref22" />
-                    <DestinationProperty type="IntegerProperty" ref="ref21" />
+                    <DestinationProperty type="IntegerProperty" ref="ref23" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
-                    <SourceProperty type="TransFuncProperty" ref="ref23" />
-                    <DestinationProperty type="TransFuncProperty" ref="ref24" />
+                    <SourceProperty type="IntegerProperty" ref="ref23" />
+                    <DestinationProperty type="IntegerProperty" ref="ref22" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
                     <SourceProperty type="TransFuncProperty" ref="ref24" />
-                    <DestinationProperty type="TransFuncProperty" ref="ref23" />
+                    <DestinationProperty type="TransFuncProperty" ref="ref25" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
-                    <SourceProperty type="CameraProperty" ref="ref15" />
-                    <DestinationProperty type="CameraProperty" ref="ref16" />
+                    <SourceProperty type="TransFuncProperty" ref="ref25" />
+                    <DestinationProperty type="TransFuncProperty" ref="ref24" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
                     <SourceProperty type="CameraProperty" ref="ref16" />
-                    <DestinationProperty type="CameraProperty" ref="ref15" />
+                    <DestinationProperty type="CameraProperty" ref="ref17" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
-                    <SourceProperty type="FloatProperty" ref="ref25" />
-                    <DestinationProperty type="FloatProperty" ref="ref26" />
+                    <SourceProperty type="CameraProperty" ref="ref17" />
+                    <DestinationProperty type="CameraProperty" ref="ref16" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
                     <SourceProperty type="FloatProperty" ref="ref26" />
-                    <DestinationProperty type="FloatProperty" ref="ref25" />
+                    <DestinationProperty type="FloatProperty" ref="ref27" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
-                    <SourceProperty type="BoolProperty" ref="ref27" />
-                    <DestinationProperty type="BoolProperty" ref="ref28" />
+                    <SourceProperty type="FloatProperty" ref="ref27" />
+                    <DestinationProperty type="FloatProperty" ref="ref26" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
                     <SourceProperty type="BoolProperty" ref="ref28" />
-                    <DestinationProperty type="BoolProperty" ref="ref27" />
+                    <DestinationProperty type="BoolProperty" ref="ref29" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
-                    <SourceProperty type="FloatVec4Property" ref="ref29" />
-                    <DestinationProperty type="FloatVec4Property" ref="ref30" />
+                    <SourceProperty type="BoolProperty" ref="ref29" />
+                    <DestinationProperty type="BoolProperty" ref="ref28" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
                     <SourceProperty type="FloatVec4Property" ref="ref30" />
-                    <DestinationProperty type="FloatVec4Property" ref="ref29" />
+                    <DestinationProperty type="FloatVec4Property" ref="ref31" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
-                    <SourceProperty type="FloatProperty" ref="ref31" />
-                    <DestinationProperty type="FloatProperty" ref="ref32" />
+                    <SourceProperty type="FloatVec4Property" ref="ref31" />
+                    <DestinationProperty type="FloatVec4Property" ref="ref30" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
                     <SourceProperty type="FloatProperty" ref="ref32" />
-                    <DestinationProperty type="FloatProperty" ref="ref31" />
+                    <DestinationProperty type="FloatProperty" ref="ref33" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
-                    <SourceProperty type="BoolProperty" ref="ref33" />
-                    <DestinationProperty type="BoolProperty" ref="ref34" />
+                    <SourceProperty type="FloatProperty" ref="ref33" />
+                    <DestinationProperty type="FloatProperty" ref="ref32" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
                     <SourceProperty type="BoolProperty" ref="ref34" />
-                    <DestinationProperty type="BoolProperty" ref="ref33" />
+                    <DestinationProperty type="BoolProperty" ref="ref35" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
-                    <SourceProperty type="FloatVec4Property" ref="ref35" />
-                    <DestinationProperty type="FloatVec4Property" ref="ref36" />
+                    <SourceProperty type="BoolProperty" ref="ref35" />
+                    <DestinationProperty type="BoolProperty" ref="ref34" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
                     <SourceProperty type="FloatVec4Property" ref="ref36" />
-                    <DestinationProperty type="FloatVec4Property" ref="ref35" />
-                    <Evaluator type="LinkEvaluatorId" />
-                </PropertyLink>
-                <PropertyLink>
-                    <SourceProperty type="FloatVec4Property" ref="ref37" />
-                    <DestinationProperty type="FloatVec4Property" ref="ref38" />
-                    <Evaluator type="LinkEvaluatorId" />
-                </PropertyLink>
-                <PropertyLink>
-                    <SourceProperty type="FloatVec4Property" ref="ref38" />
                     <DestinationProperty type="FloatVec4Property" ref="ref37" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
-                    <SourceProperty type="FloatProperty" ref="ref39" />
-                    <DestinationProperty type="FloatProperty" ref="ref40" />
+                    <SourceProperty type="FloatVec4Property" ref="ref37" />
+                    <DestinationProperty type="FloatVec4Property" ref="ref36" />
+                    <Evaluator type="LinkEvaluatorId" />
+                </PropertyLink>
+                <PropertyLink>
+                    <SourceProperty type="FloatVec4Property" ref="ref38" />
+                    <DestinationProperty type="FloatVec4Property" ref="ref39" />
+                    <Evaluator type="LinkEvaluatorId" />
+                </PropertyLink>
+                <PropertyLink>
+                    <SourceProperty type="FloatVec4Property" ref="ref39" />
+                    <DestinationProperty type="FloatVec4Property" ref="ref38" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
                     <SourceProperty type="FloatProperty" ref="ref40" />
-                    <DestinationProperty type="FloatProperty" ref="ref39" />
+                    <DestinationProperty type="FloatProperty" ref="ref41" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
-                    <SourceProperty ref="ref41" />
-                    <DestinationProperty ref="ref42" />
+                    <SourceProperty type="FloatProperty" ref="ref41" />
+                    <DestinationProperty type="FloatProperty" ref="ref40" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
                     <SourceProperty ref="ref42" />
-                    <DestinationProperty ref="ref41" />
+                    <DestinationProperty ref="ref43" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
                     <SourceProperty ref="ref43" />
-                    <DestinationProperty ref="ref44" />
+                    <DestinationProperty ref="ref42" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
                 <PropertyLink>
                     <SourceProperty ref="ref44" />
-                    <DestinationProperty ref="ref43" />
+                    <DestinationProperty ref="ref45" />
+                    <Evaluator type="LinkEvaluatorId" />
+                </PropertyLink>
+                <PropertyLink>
+                    <SourceProperty ref="ref45" />
+                    <DestinationProperty ref="ref44" />
                     <Evaluator type="LinkEvaluatorId" />
                 </PropertyLink>
             </PropertyLinks>
