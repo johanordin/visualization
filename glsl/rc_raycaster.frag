@@ -7,6 +7,7 @@ struct VOLUME_STRUCT {
     sampler3D volume_;              // the actual dataset normalized
     vec3 datasetDimensions_;        // the dataset's resolution, e.g. [ 256.0, 128.0, 128.0]
     vec3 datasetDimensionsRCP_;     // Reciprocal of the dataset dimension (= 1/datasetDimensions_)
+    
 };
 
 struct TEXTURE_PARAMETERS {
@@ -46,54 +47,58 @@ uniform sampler1D transferFunc_;
 /////////////////////////////////////////////////////
 
 vec3 calculateGradient(in vec3 samplePosition) {
-    const vec3 h = volumeStruct_.datasetDimensionsRCP_;
+     const vec3 h = volumeStruct_.datasetDimensionsRCP_;
     // Implement central differences
+    vec3 grad;
     
-    float x1 = texture3D(volumeStruct_.volume_,samplePosition-h.x).a;
-    float x2 = texture3D(volumeStruct_.volume_,samplePosition+h.x).a;
-    float y1 = texture3D(volumeStruct_.volume_,samplePosition-h.y).a;
-    float y2 = texture3D(volumeStruct_.volume_,samplePosition+h.y).a;
-    float z1 = texture3D(volumeStruct_.volume_,samplePosition-h.z).a;
-    float z2 = texture3D(volumeStruct_.volume_,samplePosition+h.z).a;
-    //vec3 b = texture(volumeStruct_.volume_,vec3(samplePosition.x+samplingStepSize_,samplePosition.y,samplePosition.z)).rgb;
-   
-
-   vec3 gradient;
-    gradient.x = (x2-x1)/2;
-    gradient.y = (y2-y1)/2;
-    gradient.z = (z2-z1)/2;
+    vec3 h_x = vec3(h.x,0,0);
+    vec3 h_y = vec3(0,h.y,0);
+    vec3 h_z = vec3(0,0,h.z);
     
-    //return samplePosition;
-    return normalize(gradient);
+    vec3 x_plus = samplePosition + h_x;
+    vec3 x_minus = samplePosition - h_x;
     
-    //return vec3(0.0);
+    float x_component = texture(volumeStruct_.volume_, x_plus).a - texture(volumeStruct_.volume_, x_minus).a;
+    
+    vec3 y_plus = samplePosition + h_y;
+    vec3 y_minus = samplePosition - h_y;
+    
+    float y_component = texture(volumeStruct_.volume_, y_plus).a - texture(volumeStruct_.volume_, y_minus).a;
+    
+    vec3 z_plus = samplePosition + h_z;
+    vec3 z_minus = samplePosition - h_z;
+    
+    float z_component = texture(volumeStruct_.volume_, z_plus).a - texture(volumeStruct_.volume_, z_minus).a;
+  
+    grad = vec3(x_component,y_component,z_component);
+    grad = grad/(2*h);
+    
+    return grad;
 }
 
 vec3 applyPhongShading(in vec3 pos, in vec3 gradient, in vec3 ka, in vec3 kd, in vec3 ks) {
     // Implement phong shading
 
-    vec3 ambi;
-    vec3 diff;
-    vec3 spec;
-    
-    vec3 L = normalize(pos - lightSource_.position_);
+    vec3 L = normalize(lightSource_.position_ - pos);
     vec3 V = normalize(cameraPosition_ - pos);
-    //vec3 R = normalize(2 * dot(gradient,L)*gradient-L);
-    vec3 H = normalize(L+V);
+    vec3 N = normalize(gradient);
     
-    //vec3 R = 2*dot(gradient,L)*gradient - L;
-    //vec3 V = pos - cameraPosition_;
+    vec3 R = normalize(V + L);
     
-    ambi = ka * lightSource_.ambientColor_;
-    diff = kd * lightSource_.diffuseColor_ *dot(gradient,L);
-    spec = ks * lightSource_.specularColor_*dot(gradient,H);
-    //spec = ki*LIGHT_SOURCE*dot(R,V);
+    vec3 shadedColor = vec3(0.0, 0.0 ,0.0);
     
-    return ambi + diff + spec;
+    float NdotL = max(dot(N,L), 0.0);
+    float NdotH = pow(max(dot(N,R), 0.0), shininess_);
     
+    vec3 diffColor = kd * lightSource_.diffuseColor_ * NdotL;
+    vec3 specColor = ks * lightSource_.specularColor_ * NdotH;
+    vec3 ambColor = ka * lightSource_.ambientColor_;
     
+    shadedColor += diffColor;
+    shadedColor += specColor;
+    shadedColor += ambColor;
     
-    //return vec3(0.0);
+    return shadedColor;
 }
 
 void rayTraversal(in vec3 first, in vec3 last) {
@@ -101,6 +106,7 @@ void rayTraversal(in vec3 first, in vec3 last) {
     float t     = 0.0;
     float tIncr = 0.0;
     float tEnd  = 1.0;
+   
     vec3 rayDirection = last - first;
     tEnd = length(rayDirection);
     rayDirection = normalize(rayDirection);
@@ -113,21 +119,18 @@ void rayTraversal(in vec3 first, in vec3 last) {
         
         vec3 gradient = calculateGradient(samplePos);
 	vec4 color = texture(transferFunc_, intensity);
-	
-	
         color.rgb = applyPhongShading(samplePos, gradient, color.rgb, color.rgb, vec3(1.0,1.0,1.0));
-
-
+	int i = 0;
+      
         // if opacity greater zero, apply compositing
         if (color.a > 0.0) {
             color.a = 1.0 - pow(1.0 - color.a, samplingStepSize_ * SAMPLING_BASE_INTERVAL_RCP);
             // Insert your front-to-back alpha compositing code here
-            
-	    result.rgb += (1.0 - result.a)*color.rgb*color.a;
-            result.a += (1.0 - result.a)*color.a;
-
+	    
+	  result = color * color.a + (1.0-color.a) * result;
+	  result.a = color.a + (1.0-color.a) * result.a;
         }
-
+	    
         // early ray termination
         if (result.a > 1.0)
             finished = true;

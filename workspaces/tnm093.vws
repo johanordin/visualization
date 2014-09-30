@@ -10,15 +10,10 @@
         </VolumeContainer>
         <ProcessorNetwork version="11">
             <MetaData>
-                <MetaItem name="ProcessorSelection" type="SelectionMetaData::Processor">
-                    <values>
-                        <item type="TNMParallelCoordinates" ref="ref2" />
-                    </values>
-                </MetaItem>
                 <MetaItem name="Zoom" type="ZoomMetaData">
-                    <transform.row0 x="1.4174114465713501" y="0" z="0" />
-                    <transform.row1 x="0" y="1.4174114465713501" z="0" />
-                    <transform.row2 x="339.0924072265625" y="126.21071624755859375" z="1" />
+                    <transform.row0 x="0.89291322231292725" y="0" z="0" />
+                    <transform.row1 x="0" y="0.89291322231292725" z="0" />
+                    <transform.row2 x="398.34332275390625" y="26.48138427734375" z="1" />
                 </MetaItem>
             </MetaData>
             <Processors>
@@ -43,11 +38,11 @@
                 <Processor type="Canvas" name="Canvas" id="ref1">
                     <MetaData>
                         <MetaItem name="ProcessorGraphicsItem" type="PositionMetaData" x="-150" y="261" />
-                        <MetaItem name="ProcessorWidget" type="WindowStateMetaData" visible="true" x="353" y="365" width="699" height="684" />
+                        <MetaItem name="ProcessorWidget" type="WindowStateMetaData" visible="true" x="377" y="352" width="536" height="525" />
                     </MetaData>
                     <Properties>
                         <Property name="canvasSize">
-                            <value x="699" y="684" />
+                            <value x="536" y="525" />
                         </Property>
                         <Property name="showCursor" value="true" />
                     </Properties>
@@ -72,9 +67,9 @@
                     </MetaData>
                     <Properties>
                         <Property name="brushingIndices" id="ref45" />
-                        <Property name="firstAxis" value="1" />
+                        <Property name="firstAxis" value="0" />
                         <Property name="linkingIndices" id="ref43" />
-                        <Property name="secondAxis" value="3" />
+                        <Property name="secondAxis" value="0" />
                     </Properties>
                     <InteractionHandlers />
                 </Processor>
@@ -105,9 +100,9 @@
                             <MetaData>
                                 <MetaItem name="EditorWindow" type="WindowStateMetaData" visible="false" x="751" y="417" />
                             </MetaData>
-                            <position x="2.48959923" y="-0.18013385" z="0.34682757" />
+                            <position x="1.74442673" y="1.44940424" z="1.09865069" />
                             <focus x="0" y="0" z="0" />
-                            <upVector x="0.06493869" y="0.99656254" z="0.05144007" />
+                            <upVector x="-0.51528805" y="0.81681103" z="-0.25941899" />
                         </Property>
                         <Property name="jitterEntryPoints" value="false" />
                         <Property name="jitterStepLength" value="0.005" />
@@ -179,7 +174,7 @@
                         <Property name="mouseEvent.cursorPositionMove" lod="1" enabled="true" mouseAction="1" mouseButtons="0" keyCode="0" modifier="0" shareEvents="true" />
                         <Property name="mouseEvent.cursorPositionPress" lod="1" enabled="true" mouseAction="19" mouseButtons="3" keyCode="0" modifier="0" shareEvents="true" />
                         <Property name="mousePositionProperty">
-                            <value x="-1" y="-1" z="-1" />
+                            <value x="-0.95557368" y="-0.64552236" z="0.59649122" />
                         </Property>
                         <Property name="numSlicesPerCol" value="1" />
                         <Property name="numSlicesPerRow" value="1" />
@@ -193,7 +188,7 @@
                         <Property name="showCursorInformation" value="onMove" />
                         <Property name="showSliceNumber" value="true" />
                         <Property name="sliceAlignmentProp" value="xy-plane" />
-                        <Property name="sliceIndex" value="51" />
+                        <Property name="sliceIndex" value="91" />
                         <Property name="textureBorderIntensity" value="0" />
                         <Property name="textureClampMode_" value="clamp-to-edge" />
                         <Property name="textureFilterMode" value="linear" />
@@ -242,9 +237,9 @@
                             <MetaData>
                                 <MetaItem name="EditorWindow" type="WindowStateMetaData" visible="false" x="751" y="417" />
                             </MetaData>
-                            <position x="2.48959923" y="-0.18013385" z="0.34682757" />
+                            <position x="1.74442673" y="1.44940424" z="1.09865069" />
                             <focus x="0" y="0" z="0" />
-                            <upVector x="0.06493869" y="0.99656254" z="0.05144007" />
+                            <upVector x="-0.51528805" y="0.81681103" z="-0.25941899" />
                         </Property>
                         <Property name="interactionCoarseness" value="4" id="ref22" />
                         <Property name="interactionQuality" value="1" id="ref40" />
@@ -314,9 +309,9 @@
                             <MetaData>
                                 <MetaItem name="EditorWindow" type="WindowStateMetaData" visible="false" x="751" y="417" />
                             </MetaData>
-                            <position x="2.48959923" y="-0.18013385" z="0.34682757" />
+                            <position x="1.74442673" y="1.44940424" z="1.09865069" />
                             <focus x="0" y="0" z="0" />
-                            <upVector x="0.06493869" y="0.99656254" z="0.05144007" />
+                            <upVector x="-0.51528805" y="0.81681103" z="-0.25941899" />
                         </Property>
                         <Property name="classification" value="transfer-function" />
                         <Property name="compositing" value="dvr" />
@@ -383,7 +378,7 @@
                 <Processor type="Canvas" name="Canvas 2" id="ref13">
                     <MetaData>
                         <MetaItem name="ProcessorGraphicsItem" type="PositionMetaData" x="154" y="157" />
-                        <MetaItem name="ProcessorWidget" type="WindowStateMetaData" visible="false" x="608" y="481" width="536" height="525" />
+                        <MetaItem name="ProcessorWidget" type="WindowStateMetaData" visible="false" x="1172" y="417" width="536" height="525" />
                     </MetaData>
                     <Properties>
                         <Property name="canvasSize">
