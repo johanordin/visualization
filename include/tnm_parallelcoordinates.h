@@ -63,16 +63,19 @@ protected:
 		// position: the position (in [-1,1]) where the axis handle will be drawn
         AxisHandle(AxisHandlePosition location, int index, const tgt::vec2& position);
         
-		// Returns the index of the axis handle
+	// Returns the index of the axis handle
         int index() const;
 
-		// Sets the new position of the axis handle
+	// Sets the new position of the axis handle
         void setPosition(const tgt::vec2& position);
+	
+	// Gets the new position of the axis handle
+	const tgt::vec2& getPosition() const;
 
-		// Renders the handle at the current position with the color meant for presentation
+	// Renders the handle at the current position with the color meant for presentation
         void render() const;
 
-		// Renders the handle at the current position using the encoded picking color
+	// Renders the handle at the current position using the encoded picking color
         void renderPicking() const;
         
     private:
