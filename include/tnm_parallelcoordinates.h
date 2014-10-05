@@ -115,12 +115,14 @@ private:
 	// The id of the currently picked handle; necessary in the interaction between the
 	// mouseClick and the mouseMove methods to store the ID that was clicked
     int _pickedHandle;
+    
+ 
 
 	//
 	IndexProperty _brushingIndices;  // A list of voxel indices that should be ignored in the rendering
 	IndexProperty _linkingIndices; // A list of voxel indices that should be enhanced during rendering
 
-	std::set<unsigned int> _brushingList; // The internal storage for the list of ignored voxels
+	std::set<unsigned int> _brushingList; // The_data internal storage for the list of ignored voxels
 	std::set<unsigned int> _linkingList; // The internal storage for the list of selected voxels
 };
 
