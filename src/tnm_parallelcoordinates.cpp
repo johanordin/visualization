@@ -6,8 +6,8 @@
 namespace voreen {
 
 
-    float minimum [4] = { 0.5, 0.5, 0.5, 0.5 };
-    float maximum [4] = { 0.5, 0.5, 0.5, 0.5 };
+float minimum [4] = { 0.5, 0.5, 0.5, 0.5 };
+float maximum [4] = { 0.5, 0.5, 0.5, 0.5 };
 
 TNMParallelCoordinates::AxisHandle::AxisHandle(AxisHandlePosition location, int index, const tgt::vec2& position)
     : _location(location)
@@ -187,38 +187,30 @@ void TNMParallelCoordinates::handleMouseMove(tgt::MouseEvent* e) {
     // Move the stored index along its axis (if it is a valid picking point)
     AxisHandle& handle = _handles.at(_pickedHandle);
 
-
-
-
     if (_pickedHandle == -1 ) {
         return;
-    }else {
+    }
+	else {
         //AxisHandle& handle = _handles.at(_pickedHandle);
-
-
         if (_pickedHandle % 2 == 0){
             //nere
-            if (normalizedDeviceCoordinates.y > _handles.at(_pickedHandle+1).getPosition().y){
-
+            if (normalizedDeviceCoordinates.y > _handles.at(_pickedHandle+1).getPosition().y) {
                 const tgt::vec2& position = tgt::vec2( handle.getPosition().x, _handles.at(_pickedHandle+1).getPosition().y);
                 handle.setPosition(position);
             }
-
-            else
-            {
+            else {
                 const tgt::vec2& position = tgt::vec2( handle.getPosition().x, normalizedDeviceCoordinates.y);
                 handle.setPosition(position);
             }
 
-        }else{
+        }
+		else {
 
-            if (normalizedDeviceCoordinates.y < _handles.at(_pickedHandle+1).getPosition().y){
+            if (normalizedDeviceCoordinates.y < _handles.at(_pickedHandle+1).getPosition().y) {
                 const tgt::vec2& position = tgt::vec2( handle.getPosition().x, _handles.at(_pickedHandle-1).getPosition().y);
                 handle.setPosition(position);
             }
-
-            else
-            {
+            else {
                  const tgt::vec2& position = tgt::vec2( handle.getPosition().x, normalizedDeviceCoordinates.y);
                  handle.setPosition(position);
             }
@@ -227,38 +219,20 @@ void TNMParallelCoordinates::handleMouseMove(tgt::MouseEvent* e) {
         //const tgt::vec2& position = tgt::vec2( handle.getPosition().x, normalizedDeviceCoordinates.y);
     }
 
-  const Data* _data = _inport.getData();
-
-    //std::numerical_limits<float>::max()
-/*
-    for (int i = 0; i < 4; i++){
-        for (size_t t = 0; t < _data->size();t++){
-
-            if (_data->at(t).dataValues[i]<minimum[i])
-            {
-                minimum[i] = _data->at(t).dataValues[i];
-            }
-
-            if (_data->at(t).dataValues[i]>maximum[i])
-            {
-                maximum[i] = _data->at(t).dataValues[i];
-            }
-
-        }
-    }
-
-
-*/
-
+	const Data* _data = _inport.getData();
 
     int t;
-    if (_pickedHandle < 2){
+
+    if (_pickedHandle < 2) {
         t = 0;
-    }else if(_pickedHandle > 1 && _pickedHandle < 4){
+    }
+	else if (_pickedHandle > 1 && _pickedHandle < 4) {
         t = 1;
-    }else if(_pickedHandle > 3 && _pickedHandle < 6){
+    }
+	else if (_pickedHandle > 3 && _pickedHandle < 6) {
         t = 2;
-    }else{
+    }
+	else {
         t = 3;
     }
 
@@ -266,41 +240,25 @@ void TNMParallelCoordinates::handleMouseMove(tgt::MouseEvent* e) {
    // for (int t = 0; t < 4; t++){
 
         for (size_t i = 0; i < _data->size(); i++){
-
             if (_pickedHandle % 2 == 0){
-
-                if (handle.getPosition().y > (-1 + (2*(_data->at(i).dataValues[t]-minimum[t]))/(maximum[t]-minimum[t])) ){
-
-
-//std::cout << handle.getPosition().y <<" > " << (-1 + (2*(_data->at(i).dataValues[t]-minimum[t]))/(maximum[t]-minimum[t])) << std::endl;
-
+                if (handle.getPosition().y > (-1 + (2*(_data->at(i).dataValues[t]-minimum[t]))/(maximum[t]-minimum[t])) ) {
+				//std::cout << handle.getPosition().y <<" > " << (-1 + (2*(_data->at(i).dataValues[t]-minimum[t]))/(maximum[t]-minimum[t])) << std::endl;
                     _brushingList.insert(i);
                 }
-                else{
-
+                else {
                    _brushingList.erase(i);
-
                 }
             }
             else {
-
-                if (handle.getPosition().y < (-1 + (2*(_data->at(i).dataValues[t]-minimum[t]))/(maximum[t]-minimum[t])) ){
-//std::cout << handle.getPosition().y <<" < " << (-1 + (2*(_data->at(i).dataValues[t]-minimum[t]))/(maximum[t]-minimum[t])) << std::endl;
-
+                if (handle.getPosition().y < (-1 + (2*(_data->at(i).dataValues[t]-minimum[t]))/(maximum[t]-minimum[t])) ) {
+				//std::cout << handle.getPosition().y <<" < " << (-1 + (2*(_data->at(i).dataValues[t]-minimum[t]))/(maximum[t]-minimum[t])) << std::endl;
                     _brushingList.insert(i);
                 }
-                else{
-
+                else {
                    _brushingList.erase(i);
-
                 }
-
             }
         }
-
-
-
-
    // }
 
 
@@ -320,10 +278,7 @@ void TNMParallelCoordinates::renderLines() {
 	//
     // Implement your line drawing
 	//
-
 	const Data* _data = _inport.getData();
-
-
 /*
 	std::set<unsigned int>::iterator it;
 
@@ -341,20 +296,16 @@ void TNMParallelCoordinates::renderLines() {
     float maximum [4] = { 0.5, 0.5, 0.5, 0.5 };
     */
 //std::numerical_limits<float>::max()
-    for (int i = 0; i < 4; i++){
 
-        for (size_t t = 0; t < _data->size();t++){
 
-            if (_data->at(t).dataValues[i]<minimum[i])
-            {
+    for (int i = 0; i < 4; i++) {
+        for (size_t t = 0; t < _data->size();t++) {
+            if (_data->at(t).dataValues[i]<minimum[i]) {
                 minimum[i] = _data->at(t).dataValues[i];
             }
-
-            if (_data->at(t).dataValues[i]>maximum[i])
-            {
+            if (_data->at(t).dataValues[i]>maximum[i]) {
                 maximum[i] = _data->at(t).dataValues[i];
             }
-
         }
     }
 
@@ -363,15 +314,10 @@ void TNMParallelCoordinates::renderLines() {
     //std::cout << maximum << "  " << minimum << std::endl;
     //system("pause");
 
-    for (size_t i = 0; i < _data->size(); i++){
-
+    for (size_t i = 0; i < _data->size(); i++) {
         glBegin(GL_LINES);
         glColor3f(0,0,1);
-        //glVertex2f( -1.0f, _data->at(i).dataValues[0]/temp);
-        //glVertex2f( -0.5f, _data->at(i).dataValues[1]/temp);
-
         //if (std::distance(_brushingList.end(), _brushingList.find(i))==0 ) {
-
             glVertex2f( -1.0f, -1 + (2*(_data->at(i).dataValues[0]-minimum[0]))/(maximum[0]-minimum[0]));
             glVertex2f( -0.5f, -1 + (2*(_data->at(i).dataValues[1]-minimum[1]))/(maximum[1]-minimum[1]));
         //}
@@ -381,9 +327,6 @@ void TNMParallelCoordinates::renderLines() {
     for (size_t i = 0; i < _data->size(); i++){
         glBegin(GL_LINES);
         glColor3f(0,1,0);
-        //glVertex2f( -0.5f,_data->at(i).dataValues[1]/temp);
-        //glVertex2f(  0.5f,_data->at(i).dataValues[2]/temp);
-
         glVertex2f( -0.5f, -1 + (2*(_data->at(i).dataValues[1]-minimum[1]))/(maximum[1]-minimum[1]));
         glVertex2f(  0.5f, -1 + (2*(_data->at(i).dataValues[2]-minimum[2]))/(maximum[2]-minimum[2]));
         glEnd();
@@ -392,9 +335,6 @@ void TNMParallelCoordinates::renderLines() {
     for (size_t i = 0; i < _data->size(); i++){
         glBegin(GL_LINES);
         glColor3f(1,0,0);
-        //glVertex2f( 0.5f,_data->at(i).dataValues[2]/temp);
-        //glVertex2f( 1.0f,_data->at(i).dataValues[3]/temp);
-
         glVertex2f( 0.5f, -1 + (2*(_data->at(i).dataValues[2]-minimum[2]))/(maximum[2]-minimum[2]));
         glVertex2f( 1.0f, -1 + (2*(_data->at(i).dataValues[3]-minimum[3]))/(maximum[3]-minimum[3]));
 
