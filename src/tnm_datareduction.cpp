@@ -34,12 +34,43 @@ void TNMDataReduction::process() {
 
 	// Our new data
 	Data* outportData = new Data;
-    for (size_t i = 0; i < inportData.size(); ++i) {
-        const VoxelDataItem& item = inportData[i];
 
-        // Filter the 'inportData' based on the percentage and add it to 'outportData'
+	int newSize = int(inportData.size()*percentage);
 
-    }
+
+    //outportData->assign(inportData.begin(), inportData.end());
+
+
+
+    //outportData->assign(outportData.begin(), outportData.begin() + newSize );
+
+
+//    for (size_t i = 0; i < inportData.size(); ++i) {
+//
+//        const VoxelDataItem& item = inportData[i];
+//        outportData->assign(i, item);
+//
+//        // Filter the 'inportData' based on the percentage and add it to 'outportData'
+//
+//
+//    }
+
+    outportData->assign(inportData.begin(), inportData.end());
+
+    std::random_shuffle (outportData->begin(), outportData->end());
+
+    outportData->erase(outportData->begin(), outportData->begin() + newSize);
+
+
+    //outportData->resize(newSize);
+
+    /*
+     for (size_t i = 0; i < newSize; ++i) {
+
+
+
+     }
+    */
 
 	// sort the data by the voxel index for faster processing later
 	std::sort(outportData->begin(), outportData->end(), sortByIndex);
