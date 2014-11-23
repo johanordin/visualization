@@ -75,6 +75,12 @@ TNMParallelCoordinates::TNMParallelCoordinates()
         tgt::MouseEvent::MOUSE_BUTTON_LEFT, tgt::MouseEvent::CLICK, tgt::Event::MODIFIER_NONE);
     addEventProperty(_mouseClickEvent);
 
+     _mouseClickEvent = new EventProperty<TNMParallelCoordinates>(
+        "mouse.rightclick", "Mouse Right Click",
+        this, &TNMParallelCoordinates::handleMouseClick,
+        tgt::MouseEvent::MOUSE_BUTTON_RIGHT, tgt::MouseEvent::CLICK, tgt::Event::MODIFIER_NONE);
+    addEventProperty(_mouseClickEvent);
+
     _mouseMoveEvent = new EventProperty<TNMParallelCoordinates>(
         "mouse.move", "Mouse Move",
         this, &TNMParallelCoordinates::handleMouseMove,
@@ -163,12 +169,11 @@ void TNMParallelCoordinates::handleMouseClick(tgt::MouseEvent* e) {
 
     _pickedHandle = handleId;
 
+    const Data& _data = *(_inport.getData());
 
-	int lineId = -1;
+	int lineId = static_cast<int>(pickingTexture->texelAsFloat(screenCoords).g * _data.size() * 255 - 1);
 	// Derive the id of the line that was clicked based on the color scheme that you devised in the
 	// renderLinesPicking method
-
-
 
 	LINFOC("Picking", "Picked line index: " << lineId);
 	if (lineId != -1)
@@ -223,132 +228,6 @@ void TNMParallelCoordinates::handleMouseMove(tgt::MouseEvent* e) {
         //const tgt::vec2& position = tgt::vec2( handle.getPosition().x, normalizedDeviceCoordinates.y);
     }
 
-	//const Data* _data = _inport.getData();
-
-    //int t;
-
-//    if (_pickedHandle < 2) {
-//        t = 0;
-//    }
-//	else if (_pickedHandle > 1 && _pickedHandle < 4) {
-//        t = 1;
-//    }
-//	else if (_pickedHandle > 3 && _pickedHandle < 6) {
-//        t = 2;
-//    }
-//	else {
-//        t = 3;
-//    }
-
-//    std::vector<float> movement;
-//
-//    movement.push_back(handle.getPosition().y);
-//
-//    //float& ytemp = handle.getPosition().y;
-//    bool move_up = false;
-//
-//    if (movement.size() > 0 && movement.size() < 2){
-//
-//        if ( movement.at(0) <  movement.at(1) ) {
-//            move_up = true;
-//            //std::cout << move_up << std::endl;
-//            //return;
-//        }
-//
-//
-//    }
-
-
-   // for (int t = 0; t < 4; t++){
-//-----------------------------------------------------------------------------------------------------------------------------//
-        //_brushingList.clear();
-//        for (size_t i = 0; i < _data->size(); i++){
-//
-//            if (_pickedHandle % 2 == 0){
-//                //for (size_t j = 0; j < 7; j+=2) {
-//            //std::cout << handle.getPosition().y <<" < " << _handles.at(_pickedHandle).getPosition().y << std::endl;
-//
-//                    //std::cout << move_up << std::endl;
-//                    if (handle.getPosition().y > (-1 + (2*(_data->at(i).dataValues[t]-minimum[t]))/(maximum[t]-minimum[t])) ) {
-//                        //if ( _handles.at(_pickedHandle+1).getPosition().y < (-1 + (2*(_data->at(i).dataValues[t]-minimum[t]))/(maximum[t]-minimum[t])) ){
-//                            _brushingList.insert(_data->at(i).voxelIndex);
-//                        //}
-//                    }
-//                    //else {
-//                        //for (size_t j = 0; j < 7; j+=2) {
-//
-//                            //if( _handles.at(_pickedHandle+1).getPosition().y < (-1 + (2*(_data->at(i).dataValues[t]-minimum[t]))/(maximum[t]-minimum[t]))  ) {
-//                                //_brushingList.erase(i);
-//                            //}
-//                        //}
-//                    //}
-//                //}
-//
-//            }
-//            else {
-//
-//                //for (size_t j = 1; j <= 7; j+=2) {
-//                    if (handle.getPosition().y < (-1 + (2*(_data->at(i).dataValues[t]-minimum[t]))/(maximum[t]-minimum[t])) ) {
-//                    //std::cout << handle.getPosition().y <<" < " << (-1 + (2*(_data->at(i).dataValues[t]-minimum[t]))/(maximum[t]-minimum[t])) << std::endl;
-//                        _brushingList.insert(_data->at(i).voxelIndex);
-//                        //_brushingList.insert(i);
-//                    }
-//
-//                    //else {
-//                        //for (size_t j = 1; j <= 7; j+=2) {
-//                            //if( _handles.at(_pickedHandle-1).getPosition().y > (-1 + (2*(_data->at(i).dataValues[t]-minimum[t]))/(maximum[t]-minimum[t]))  ){
-//                               //_brushingList.erase(i);
-//                            //}
-//                        //}
-//                    //}
-//
-//            }
-//        }
-//-----------------------------------------------------------------------------------------------------------------------------//
-
-
-
-//-----------------------------------------------------------------------------------------------------------------------------//
-//        for (size_t i = 0; i < _data->size(); i++){
-//
-//            if (_pickedHandle % 2 == 0){
-//
-//                for (size_t j = 0; j < 7; j+=2) {
-//
-//                    if (_handles.at(j).getPosition().y > (-1 + (2*(_data->at(i).dataValues[t]-minimum[t]))/(maximum[t]-minimum[t])) ) {
-//
-//                        _brushingList.insert(i);
-//                    }
-//
-//
-//                    else if( _handles.at(j+1).getPosition().y < (-1 + (2*(_data->at(i).dataValues[t]-minimum[t]))/(maximum[t]-minimum[t]))  )
-//                    {
-//                       _brushingList.erase(i);
-//                    }
-//                }
-//
-//            }
-//            else {
-//
-//                for (size_t j = 1; j <= 7; j+=2) {
-//
-//                    if (_handles.at(j).getPosition().y < (-1 + (2*(_data->at(i).dataValues[t]-minimum[t]))/(maximum[t]-minimum[t])) ) {
-//                    //std::cout << handle.getPosition().y <<" < " << (-1 + (2*(_data->at(i).dataValues[t]-minimum[t]))/(maximum[t]-minimum[t])) << std::endl;
-//                        _brushingList.insert(i);
-//                    }
-//
-//                    else if( _handles.at(j-1).getPosition().y > (-1 + (2*(_data->at(i).dataValues[t]-minimum[t]))/(maximum[t]-minimum[t]))  ){
-//                       _brushingList.erase(i);
-//                    }
-//                }
-//            }
-//        }
-//-----------------------------------------------------------------------------------------------------------------------------//
-
-
-
-
-   // }
 
 
     //-----------------------------
@@ -368,22 +247,7 @@ void TNMParallelCoordinates::renderLines() {
     // Implement your line drawing
 	//
 	const Data* _data = _inport.getData();
-/*
-	std::set<unsigned int>::iterator it;
 
-	for(it=_brushingList.begin(); it!=_brushingList.end(); it++)
-    {
-        //std::cout << (*it) << std::endl;
-        //_data->erase((int(*it)));
-        _data->at((int(*it)));
-    }
-
-*/
-    //const Data& _data = *(_inport.getData());
-/*
-    float minimum [4] = { 0.5, 0.5, 0.5, 0.5 };
-    float maximum [4] = { 0.5, 0.5, 0.5, 0.5 };
-    */
     for (int i = 0; i < 4; i++) {
         for (size_t t = 0; t < _data->size();t++) {
             if (_data->at(t).dataValues[i]<minimum[i]) {
@@ -396,7 +260,7 @@ void TNMParallelCoordinates::renderLines() {
     }
 
 
-//std::numerical_limits<float>::max()
+
     _brushingList.clear();
 int t=0;
 
@@ -474,29 +338,26 @@ t=3;
     }
 
 
-
-    //float temp = -1 + (2*(_data->at(i).dataValues[0]-minimum))/(maximum-minimum);
-
-    //std::cout << maximum << "  " << minimum << std::endl;
-    //system("pause");
-
-//std::cout << _brushingList.size() <<std::endl;
  glBegin(GL_LINES);
-                glColor3f(1,0,0);
+glColor3f(1,0,0);
+
     for (size_t i = 0; i < _data->size(); i++) {
 
             if ( _brushingList.find(_data->at(i).voxelIndex) == _brushingList.end()){
 
 
+                if (_linkingList.find(_data->at(i).voxelIndex) != _linkingList.end() )
+                {
+                    glColor4f(1.f,0.f,0.f, 1.f);
+                }else{
+                    glColor4f(0.f,1.f,0.f, 0.6f);
+                }
+
+
                 glVertex2f( -1.0f, -1 + (2*(_data->at(i).dataValues[0]-minimum[0]))/(maximum[0]-minimum[0]));
                 glVertex2f( -0.5f, -1 + (2*(_data->at(i).dataValues[1]-minimum[1]))/(maximum[1]-minimum[1]));
 
-
-
             }
-
-
-
         }
 
 
@@ -505,6 +366,16 @@ t=3;
 
 
         if ( _brushingList.find(_data->at(i).voxelIndex) == _brushingList.end()){
+
+
+            if (_linkingList.find(_data->at(i).voxelIndex) != _linkingList.end() )
+              {
+                    glColor4f(1.f,0.f,0.f, 1.f);
+                }else{
+                    glColor4f(0.f,1.f,0.f, 0.6f);
+                }
+
+
 
             glVertex2f( -0.5f, -1 + (2*(_data->at(i).dataValues[1]-minimum[1]))/(maximum[1]-minimum[1]));
             glVertex2f(  0.5f, -1 + (2*(_data->at(i).dataValues[2]-minimum[2]))/(maximum[2]-minimum[2]));
@@ -517,6 +388,15 @@ t=3;
 
 
         if ( _brushingList.find(_data->at(i).voxelIndex) == _brushingList.end()){
+
+
+            if (_linkingList.find(_data->at(i).voxelIndex) != _linkingList.end() )
+              {
+                    glColor4f(1.f,0.f,0.f, 1.f);
+                }else{
+                    glColor4f(0.f,1.f,0.f, 0.6f);
+                }
+
 
             glVertex2f( 0.5f, -1 + (2*(_data->at(i).dataValues[2]-minimum[2]))/(maximum[2]-minimum[2]));
             glVertex2f( 1.0f, -1 + (2*(_data->at(i).dataValues[3]-minimum[3]))/(maximum[3]-minimum[3]));
@@ -533,18 +413,41 @@ void TNMParallelCoordinates::renderLinesPicking() {
 	// voxel identifier into the color. The red color channel is already occupied, so you have 3
 	// channels with 32-bit each at your disposal (green, blue, alpha)
 
-/*
+
 	const Data* _data = _inport.getData();
 
-
 	for (size_t i = 0; i < _data->size(); i++){
-        ( _data->at(i).voxelIndex / _data->size() )
 
-    int handleId = static_cast<int>(pickingTexture->texelAsFloat(_data->at(i).voxelIndex / _data->size()).g * 255 - 1);
+        float color = (_data->at(i).voxelIndex + 1) / (_data->size() * 255.f) ;
+
+        //std::cout << "color: " << color << std::endl;
+
+        //std::cout << "color: " << _linkingList.size() << std::endl;
+
+        glBegin(GL_LINES);
+        glColor3f(0.f, color, 0.f);
+
+        if ( _brushingList.find(_data->at(i).voxelIndex) == _brushingList.end()  ){
+
+                glVertex2f( -1.0f, -1 + (2*(_data->at(i).dataValues[0]-minimum[0]))/(maximum[0]-minimum[0]));
+                glVertex2f( -0.5f, -1 + (2*(_data->at(i).dataValues[1]-minimum[1]))/(maximum[1]-minimum[1]));
+
+                glVertex2f( -0.5f, -1 + (2*(_data->at(i).dataValues[1]-minimum[1]))/(maximum[1]-minimum[1]));
+                glVertex2f(  0.5f, -1 + (2*(_data->at(i).dataValues[2]-minimum[2]))/(maximum[2]-minimum[2]));
+
+                glVertex2f( 0.5f, -1 + (2*(_data->at(i).dataValues[2]-minimum[2]))/(maximum[2]-minimum[2]));
+                glVertex2f( 1.0f, -1 + (2*(_data->at(i).dataValues[3]-minimum[3]))/(maximum[3]-minimum[3]));
+
+            }
 
 
-}
-*/
+
+
+         glEnd();
+    //int handleId = static_cast<int>(pickingTexture->texelAsFloat(_data->at(i).voxelIndex / _data->size()).g * 255 - 1);
+
+
+    }
 
 
 

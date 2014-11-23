@@ -64,13 +64,6 @@ void TNMDataReduction::process() {
 
     //outportData->resize(newSize);
 
-    /*
-     for (size_t i = 0; i < newSize; ++i) {
-
-
-
-     }
-    */
 
 	// sort the data by the voxel index for faster processing later
 	std::sort(outportData->begin(), outportData->end(), sortByIndex);
