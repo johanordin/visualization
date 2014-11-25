@@ -59,9 +59,9 @@ vec3 calculateGradient(in vec3 samplePosition) {
    
 
    vec3 gradient;
-    gradient.x = (x2-x1)/2;
-    gradient.y = (y2-y1)/2;
-    gradient.z = (z2-z1)/2;
+    gradient.x = (x2-x1)/(2*h.x);
+    gradient.y = (y2-y1)/(2*h.y);
+    gradient.z = (z2-z1)/(2*h.z);
     
     //return samplePosition;
     return normalize(gradient);
@@ -85,8 +85,8 @@ vec3 applyPhongShading(in vec3 pos, in vec3 gradient, in vec3 ka, in vec3 kd, in
     //vec3 V = pos - cameraPosition_;
     
     ambi = ka * lightSource_.ambientColor_;
-    diff = kd * lightSource_.diffuseColor_ *dot(gradient,L);
-    spec = ks * lightSource_.specularColor_*dot(gradient,H);
+    diff = kd * lightSource_.diffuseColor_ *max(dot(gradient,L), 0.f);
+    spec = ks * lightSource_.specularColor_*pow(max(dot(gradient,H), 0.f), shininess_) ;
     //spec = ki*LIGHT_SOURCE*dot(R,V);
     
     return ambi + diff + spec;

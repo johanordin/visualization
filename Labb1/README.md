@@ -6,8 +6,6 @@ git config --global user.email johno855@student.liu.se
 -----------------------------------------------------
 
 
-
-
 #Compile:
 /tmp/voreen-tnm093
 
