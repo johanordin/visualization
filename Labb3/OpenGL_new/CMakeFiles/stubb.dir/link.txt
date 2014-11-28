@@ -1,0 +1,1 @@
+/usr/bin/c++       -static-libgcc -static-libstdc++ -s CMakeFiles/stubb.dir/stubb.cpp.o  -o stubb -rdynamic -Wl,-Bstatic -lsgct -Wl,-Bdynamic -lGLU -lGL -lSM -lICE -lX11 -lXext -lX11 -lXrandr -lXi -lXxf86vm -lpthread -lXext -lXrandr -lXi -lXxf86vm -lpthread 
