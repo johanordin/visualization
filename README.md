@@ -7,7 +7,7 @@ git config --global user.email johno855@student.liu.se
 
 
 
-
+##Labb1
 #Compile:
 /tmp/voreen-tnm093
 
@@ -19,3 +19,10 @@ make -j8
 start_voreenve.sh 
 
 
+##Labb3
+
+cmake CMakeLists.txt
+
+make
+
+./stubb -config "single.xml"
