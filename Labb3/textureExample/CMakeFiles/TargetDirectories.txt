@@ -1,1 +1,0 @@
-/home/johno855/Documents/sgct/examples/examples/examples/textureExample/CMakeFiles/stubb.dir

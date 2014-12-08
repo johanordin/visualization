@@ -1,1 +1,0 @@
-/home/johno855/Documents/labb3/OpenGL_old/CMakeFiles/stubb.dir

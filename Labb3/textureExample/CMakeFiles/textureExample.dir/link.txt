@@ -1,1 +1,0 @@
-/usr/bin/c++   -std=c++11     -static-libgcc -static-libstdc++ -static CMakeFiles/textureExample.dir/main.cpp.o  -o textureExample -rdynamic -Wl,-Bstatic -lsgct -Wl,-Bdynamic -lGLU -lGL -lSM -lICE -lX11 -lXext -lX11 -lXrandr -lXi -lXxf86vm -lpthread -lXext -lXrandr -lXi -lXxf86vm -lpthread 
