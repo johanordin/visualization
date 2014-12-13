@@ -19,11 +19,13 @@ void myDecodeFun();
 void drawAxes(float size);
 void drawWireCube(float size);
 
+
 //-----------------------
 // variable declarations 
 //-----------------------
 sgct_utils::SGCTSphere * mySphere = NULL;
 sgct_utils::SGCTSphere * mySphere1 = NULL;
+sgct_utils::SGCTSphere * mySphere2 = NULL;
 
 //store each device's transform 4x4 matrix in a shared vector
 sgct::SharedVector<glm::mat4> sharedTransforms;
@@ -37,6 +39,8 @@ sgct::SGCTTracker * trackerPtr = NULL;
 
 //variables to share across cluster
 sgct::SharedDouble curr_time(0.0);
+
+size_t myTextureHandle;
 
 int main( int argc, char* argv[] )
 {
@@ -70,11 +74,30 @@ int main( int argc, char* argv[] )
 
 void myInitOGLFun()
 {
-	mySphere = new sgct_utils::SGCTSphere(0.2f, 20);
-	mySphere1 = new sgct_utils::SGCTSphere(0.05f, 20);
-	
-	glEnable(GL_DEPTH_TEST);
 
+  
+  
+  	  
+	sgct::TextureManager::instance()->setAnisotropicFilterSize(8.0f);
+	sgct::TextureManager::instance()->setCompression(sgct::TextureManager::S3TC_DXT);
+	sgct::TextureManager::instance()->loadTexure(myTextureHandle, "sphere", "sun.jpeg", true);
+	sgct::TextureManager::instance()->loadTexure(myTextureHandle, "sphere2", "earth.jpeg", true);
+	sgct::TextureManager::instance()->loadTexure(myTextureHandle, "sphere3", "moon.jpeg", true);
+  
+	mySphere = new sgct_utils::SGCTSphere(0.2f, 30); //Jorden
+	mySphere1 = new sgct_utils::SGCTSphere(0.05f, 30); //Månen
+	mySphere2 = new sgct_utils::SGCTSphere(0.5f, 30); //Solen
+		
+	
+	glEnable( GL_DEPTH_TEST );
+	glEnable( GL_COLOR_MATERIAL );
+	glDisable( GL_LIGHTING );
+	glEnable( GL_CULL_FACE );
+	glEnable( GL_TEXTURE_2D );
+
+	glCullFace(GL_BACK);
+	glFrontFace(GL_CCW);
+	
 	//only store the tracking data on the master node
 	if( gEngine->isMaster() )
 	{
@@ -199,31 +222,33 @@ void myPreSyncFun()
 void myDrawFun()
 {	
 	double speed = 25.0;
-	glPushMatrix();
-	glTranslatef(1.0, 0.0f, 0.0f);
-	glRotated(curr_time.getVal() * speed, 0.0, -1.0, 0.0);
-	glTranslatef(-1.0, 0.0f,0.0f);
+	
 	
 
+	glBindTexture( GL_TEXTURE_2D, sgct::TextureManager::instance()->getTextureByName("sphere") );
 	
 	glPushMatrix();
-	glTranslatef(0.3, 0.1f, 0.0f);
+	glRotated(curr_time.getVal() * speed, 0.0, -1.0, 0.0);
+	mySphere2->draw();
+	glPopMatrix();
+	
+	
+	
+	glPushMatrix();
+	glRotated(curr_time.getVal() * speed, 0.0, -1.0, 0.0);
+	glTranslatef(1.0, 0.0f,0.0f);
 	glRotated(curr_time.getVal() * speed*2, 0.0, -1.0, 0.0);
-	glTranslatef(-0.3, -0.1f, 0.0f);
-	glColor3f(0.0f,1.0f,0.0f);
+	glPushMatrix();	
+	glRotated(curr_time.getVal() * speed*4, 0.0, -1.0, 0.0);
+	glTranslatef(0.3, 0.1f, 0.0f);
+	glBindTexture( GL_TEXTURE_2D, sgct::TextureManager::instance()->getTextureByName("sphere3") );
 	mySphere1->draw();
 	glPopMatrix();
 	
-	glColor3f(1.0f,0.0f,0.0f);
-
+	//glColor3f(1.0f,0.0f,0.0f);
+	glBindTexture( GL_TEXTURE_2D, sgct::TextureManager::instance()->getTextureByName("sphere2") );
 	mySphere->draw();
 	glPopMatrix();
-	//glRotated(curr_time.getVal() * (speed/2.0), 1.0, 0.0, 0.0);
-
-  
-	
-	
-	
 	
 	
 // 	//draw some yellow cubes in space
