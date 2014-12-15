@@ -41,6 +41,10 @@ sgct::SGCTTracker * trackerPtr = NULL;
 sgct::SharedDouble curr_time(0.0);
 
 size_t myTextureHandle;
+<<<<<<< HEAD
+=======
+size_t myTextureHandle2;
+>>>>>>> c849537344bccbba56cb722b65e722e2c3fadbda
 
 int main( int argc, char* argv[] )
 {
@@ -81,12 +85,20 @@ void myInitOGLFun()
 	sgct::TextureManager::instance()->setAnisotropicFilterSize(8.0f);
 	sgct::TextureManager::instance()->setCompression(sgct::TextureManager::S3TC_DXT);
 	sgct::TextureManager::instance()->loadTexure(myTextureHandle, "sphere", "sun.jpeg", true);
+<<<<<<< HEAD
 	sgct::TextureManager::instance()->loadTexure(myTextureHandle, "sphere2", "earth.jpeg", true);
 	sgct::TextureManager::instance()->loadTexure(myTextureHandle, "sphere3", "moon.jpeg", true);
   
 	mySphere = new sgct_utils::SGCTSphere(0.2f, 30); //Jorden
 	mySphere1 = new sgct_utils::SGCTSphere(0.05f, 30); //Månen
 	mySphere2 = new sgct_utils::SGCTSphere(0.5f, 30); //Solen
+=======
+	sgct::TextureManager::instance()->loadTexure(myTextureHandle2, "sphere", "earth.jpeg", true);
+  
+	mySphere = new sgct_utils::SGCTSphere(0.2f, 20); //Jorden
+	mySphere1 = new sgct_utils::SGCTSphere(0.05f, 20); //Månen
+	mySphere2 = new sgct_utils::SGCTSphere(0.5f, 20); //Solen
+>>>>>>> c849537344bccbba56cb722b65e722e2c3fadbda
 		
 	
 	glEnable( GL_DEPTH_TEST );
@@ -96,7 +108,11 @@ void myInitOGLFun()
 	glEnable( GL_TEXTURE_2D );
 
 	glCullFace(GL_BACK);
+<<<<<<< HEAD
 	glFrontFace(GL_CCW);
+=======
+	glFrontFace(GL_CCW); //our p
+>>>>>>> c849537344bccbba56cb722b65e722e2c3fadbda
 	
 	//only store the tracking data on the master node
 	if( gEngine->isMaster() )
@@ -225,6 +241,7 @@ void myDrawFun()
 	
 	
 
+<<<<<<< HEAD
 	glBindTexture( GL_TEXTURE_2D, sgct::TextureManager::instance()->getTextureByName("sphere") );
 	
 	glPushMatrix();
@@ -232,9 +249,34 @@ void myDrawFun()
 	mySphere2->draw();
 	glPopMatrix();
 	
+=======
+	//glBindTexture( GL_TEXTURE_2D, sgct::TextureManager::instance()->getTextureByName("box") );
+	
+	
 	
 	
 	glPushMatrix();
+		glRotated(curr_time.getVal() * speed, 0.0, -1.0, 0.0);	
+			//glColor3f(1.0f,1.0f,0.0f);
+			
+			glActiveTexture(GL_TEXTURE0);
+		
+glBindTexture( GL_TEXTURE_2D, sgct::TextureManager::instance()->getTextureByHandle(myTextureHandle) );
+		mySphere2->draw();
+		glPopMatrix();
+	
+	
+	glPushMatrix();
+	//glTranslatef(1.0, 0.0f, 0.0f);
+	glRotated(curr_time.getVal() * speed, 0.0, -1.0, 0.0);
+	glTranslatef(1.0, 0.0f,0.0f);
+	//glRotated(-curr_time.getVal() * speed, 0.0, -1.0, 0.0);
+	//glTranslatef(-1.0, 0.0f,0.0f);
+>>>>>>> c849537344bccbba56cb722b65e722e2c3fadbda
+	
+	
+	glPushMatrix();
+<<<<<<< HEAD
 	glRotated(curr_time.getVal() * speed, 0.0, -1.0, 0.0);
 	glTranslatef(1.0, 0.0f,0.0f);
 	glRotated(curr_time.getVal() * speed*2, 0.0, -1.0, 0.0);
@@ -242,11 +284,23 @@ void myDrawFun()
 	glRotated(curr_time.getVal() * speed*4, 0.0, -1.0, 0.0);
 	glTranslatef(0.3, 0.1f, 0.0f);
 	glBindTexture( GL_TEXTURE_2D, sgct::TextureManager::instance()->getTextureByName("sphere3") );
+=======
+	//glTranslatef(0.3, 0.1f, 0.0f);
+		
+	glRotated(curr_time.getVal() * speed*2, 0.0, -1.0, 0.0);
+	glTranslatef(0.3, 0.1f, 0.0f);
+	glRotated(curr_time.getVal() * speed*2, 0.0, -1.0, 0.0);
+	//glColor3f(0.0f,1.0f,0.0f);
+>>>>>>> c849537344bccbba56cb722b65e722e2c3fadbda
 	mySphere1->draw();
 	glPopMatrix();
 	
 	//glColor3f(1.0f,0.0f,0.0f);
+<<<<<<< HEAD
 	glBindTexture( GL_TEXTURE_2D, sgct::TextureManager::instance()->getTextureByName("sphere2") );
+=======
+
+>>>>>>> c849537344bccbba56cb722b65e722e2c3fadbda
 	mySphere->draw();
 	glPopMatrix();
 	
