@@ -19,7 +19,13 @@ void myDecodeFun();
 void drawAxes(float size);
 void drawWireCube(float size);
 
+//-----------------------
+// constants declarations
+//-----------------------
 
+const float SUN_RADIUS = 0.5f;
+const float EARTH_RADIUS = 0.2f;
+const float MOON_RADIUS = 0.05f;
 //-----------------------
 // variable declarations
 //-----------------------
@@ -89,10 +95,10 @@ void myInitOGLFun()
 	sgct::TextureManager::instance()->loadTexure(myTextureHandle, "textureSun", "mars.png", true);
 	sgct::TextureManager::instance()->loadTexure(myTextureHandle, "textureEarth", "earth.jpeg", true);
 	sgct::TextureManager::instance()->loadTexure(myTextureHandle, "textureMoon", "moon.jpeg", true);
-
-	sphereSun = new sgct_utils::SGCTSphere(0.5f, 30); 		//Solen
-	sphereEarth = new sgct_utils::SGCTSphere(0.2f, 30); 		//Jorden
-	sphereMoon = new sgct_utils::SGCTSphere(0.05f, 30); 		//Månen
+	
+	sphereSun = new sgct_utils::SGCTSphere(SUN_RADIUS, 30); 		//Solen
+	sphereEarth = new sgct_utils::SGCTSphere(EARTH_RADIUS, 30); 		//Jorden
+	sphereMoon = new sgct_utils::SGCTSphere(MOON_RADIUS, 30); 		//Månen
 	
 	//only store the tracking data on the master node
 	if( gEngine->isMaster() )
@@ -276,7 +282,7 @@ void myDrawFun()
 	      //cast to vec3
 	      glm::vec3 a2 = glm::vec3(a);
 	      
-	      //calulate the new vector
+	      //calulate the projection onto the wand direction vector  --> new vector
 	      glm::vec3 ny = glm::dot(a2, b);
 	      
 	      glm::vec3 d = b-ny;
