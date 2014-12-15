@@ -1,2 +1,23 @@
  
 ./stubb -config "two_nodes.xml" -local 0
+
+
+
+
+
+Math
+
+
+skillnad mellan
+1. glm::orientate4
+2. glm::yawPitchRoll
+3. glm::eulerAngleYXZ
+
+
+
+1. Creates a 3D 4 * 4 homogeneous rotation matrix from euler angles (Y * X * Z). 
+2. Creates a 3D 4 * 4 homogeneous rotation matrix from euler angles (Y * X * Z). 
+3. Creates a 3D 4 * 4 homogeneous rotation matrix from euler angles (Y * X * Z). 
+
+
+

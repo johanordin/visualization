@@ -74,9 +74,19 @@ int main( int argc, char* argv[] )
 
 void myInitOGLFun()
 {
+  
+	glEnable( GL_DEPTH_TEST );
+	glEnable( GL_COLOR_MATERIAL );
+	glDisable( GL_LIGHTING );
+	glEnable( GL_CULL_FACE );
+	glEnable( GL_TEXTURE_2D );
+	
+	glCullFace(GL_BACK);
+	glFrontFace(GL_CCW);
+	
 	sgct::TextureManager::instance()->setAnisotropicFilterSize(8.0f);
 	sgct::TextureManager::instance()->setCompression(sgct::TextureManager::S3TC_DXT);
-	sgct::TextureManager::instance()->loadTexure(myTextureHandle, "textureSun", "sun.jpeg", true);
+	sgct::TextureManager::instance()->loadTexure(myTextureHandle, "textureSun", "mars.png", true);
 	sgct::TextureManager::instance()->loadTexure(myTextureHandle, "textureEarth", "earth.jpeg", true);
 	sgct::TextureManager::instance()->loadTexure(myTextureHandle, "textureMoon", "moon.jpeg", true);
 
@@ -84,17 +94,6 @@ void myInitOGLFun()
 	sphereEarth = new sgct_utils::SGCTSphere(0.2f, 30); 		//Jorden
 	sphereMoon = new sgct_utils::SGCTSphere(0.05f, 30); 		//Månen
 	
-
-
-	glEnable( GL_DEPTH_TEST );
-	glEnable( GL_COLOR_MATERIAL );
-	glDisable( GL_LIGHTING );
-	glEnable( GL_CULL_FACE );
-	glEnable( GL_TEXTURE_2D );
-
-	glCullFace(GL_BACK);
-	glFrontFace(GL_CCW);
-
 	//only store the tracking data on the master node
 	if( gEngine->isMaster() )
 	{
@@ -226,19 +225,86 @@ void myDrawFun()
 	//devicePtr = trackerPtr->getDevicePtr(size_t(0));
 	//getNumberOfDevices();
 
-	
-	//bind Textures 
-	glBindTexture( GL_TEXTURE_2D, sgct::TextureManager::instance()->getTextureByName("textureSun") );
-	glBindTexture( GL_TEXTURE_2D, sgct::TextureManager::instance()->getTextureByName("textureEarth") );
-	glBindTexture( GL_TEXTURE_2D, sgct::TextureManager::instance()->getTextureByName("textureMoon") );
-	
-	/*
+		/*
 	if (devicePtr->getPosition().x <= 0.5 && devicePtr->getPosition().y <= 0.5 && devicePtr-> getPosition().z <= 0.5 )
 	{
         glColor3f(1.0f,0.0f,0.0f);
 	}
 	*/
 	
+	// loop trough all the devices to find the wand
+	for(size_t j = 0; j < trackerPtr->getNumberOfDevices(); j++) {
+	    
+	    // we have found the wand if this is true
+	    if( j != sharedHeadSensorIndex.getVal() ) {
+	      
+	      //store the wand in the wandPtr
+	      wandPtr = trackerPtr->getDevicePtr(j);
+	      
+	      // get the coordinates (x,y,z) of the wand
+	      glm::vec3 wandPosition = wandPtr->getPosition();
+	      
+	      // get the Euler angeles around the x,y,z axis.
+	      glm::vec3 wandRotationEuler = wandPtr->getEulerAngles();
+	      
+	      
+	      // ---------------------------//
+	      //Calculate the distance between the Wand and the Object (Ths SUN in this case)
+	      
+	      // the origin of the sun --> constant
+	      glm:vec3 sunPosition = glm::vec3(0.f,0.f,0.f);
+	      
+	      // Already have the wandPosition
+	      
+	      // OUR b vector --> Distance from the wand to the sun. --> want the vector to point to the sun --> (0,0,0) - (a,b,c) = negative
+	      glm:vec3 b = sunPosition - wandPosition;
+	      
+	      
+	      // ---------------------------//
+	      //Calculate the where to wand is pointing
+	      
+	      //4x4 homogeneous rotation matrix from the euler angles
+	      glm::mat4 rotMat = glm::yawPitchRoll(wandRotationEuler);
+	      
+	      glm::vec4 negativeZ = glm::vec4(0.f,0.f,-1.f,0.f);
+	      
+	      glm::vec4 a = rotMat*negativeZ;
+	      
+	      // ---------------------------//
+	      //Calculate the vector d, which is the distance between origin of the SUN and the closest point from the line.
+	      
+	      //cast to vec3
+	      glm::vec3 a2 = glm::vec3(a);
+	      
+	      //calulate the new vector
+	      glm::vec3 ny = glm::dot(a2, b);
+	      
+	      glm::vec3 d = b-ny;
+	      
+	      
+	      
+	      if ( d < SUN_RADIUS ) {
+		
+		//change some color?? or set some boolean to change the color.
+		
+	      }
+	      
+	      
+	      
+	      
+	    }
+	  
+	  
+	  
+	  
+	}
+	
+	
+	//bind Textures 
+	glBindTexture( GL_TEXTURE_2D, sgct::TextureManager::instance()->getTextureByName("textureSun") );
+	glBindTexture( GL_TEXTURE_2D, sgct::TextureManager::instance()->getTextureByName("textureEarth") );
+	glBindTexture( GL_TEXTURE_2D, sgct::TextureManager::instance()->getTextureByName("textureMoon") );
+
 	// SUN
 	glPushMatrix(); //set where to start the current object transformations
 	glRotated(curr_time.getVal() * speed, 0.0, -1.0, 0.0);
@@ -264,6 +330,7 @@ void myDrawFun()
 
 
 
+	
 // 	//draw some yellow cubes in space
 // 	for( float i=-0.5f; i<=0.5f; i+=0.2f)
 // 		for(float j=-0.5f; j<=0.5f; j+=0.2f)
