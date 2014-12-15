@@ -14,78 +14,106 @@ and load libraries commonly used in the VR laboratory.
 
 <Scene>
 
+  <PythonScript url="urn:candy:python/CorrectViewpoint.py"/>
 
-  <PythonScript  DEF="PY"  url="urn:candy:python/CorrectViewpoint.py"/>
+  <PythonScript DEF="PY" url="urn:candy:python/MFtoSFBool.py"/>
+  <PythonScript DEF="PY2" url="urn:candy:python/MFtoSFBool.py"/>
 
-  <PythonScript  url="urn:candy:python/AutoLoadSO.py"/>
-
-  <PythonScript url="urn:candy:python/AutoLoadSO.py">
-    <MetadataString
-        name="library" value="vhtk" containerField="references"/>
+  <PythonScript   url="urn:candy:python/AutoLoadSO.py">
+    <MetadataString name="library" value="vhtk" containerField="references" />
   </PythonScript>
 
-
-  <!-- Put your code here -->
-
-    <SMViewpoint
-        position='0 0 0.5'
-        screenLowerLeft='-0.25 -0.20 0'
-        screenUpperRight='0.25 0.20 0'
-        screenUp='0 1 0'
-    />
-
-    <Viewpoint
-        position='0 0 0.3'
-        fieldOfView='1.047' />
-
-
+  <!-- Skewed Frustum Perspective Viewpoint -->
+  <SMViewpoint
+      position='0 0 0.5'
+      screenLowerLeft='-0.25 -0.20 0'
+      screenUpperRight='0.25 0.20 0'
+      screenUp='0 1 0'
+  />
+  <!-- Normal Viewpoint -->
+  <!--
+  <Viewpoint
+      position='0 0 0.3'
+      fieldOfView='1.047'
+  />
+  -->
 
 <Group>
-
-
-  <Transform rotation="0 1 0 3.14">
+  <!--3.14  -->
+  <!-- Global transformation. -->
+  <Transform rotation="0 1 0 3.92" translation="0 0 -0.1">
 
     <!-- Ryggen -->
     <Shape>
         <Appearance shadow ="true">
             <Material shininess="1" diffuseColor="1 0 0" specularColor="0.5 0.5 0.5" />
-            <FrictionalSurface stiffness="1500" damping="5" useRelativeValues="false"/>
+            <FrictionalSurface stiffness="1000" damping="4" useRelativeValues="false"/>
         </Appearance>
         <Box DEF="RYGG" size="0.1 0.14 0.01" />
-
-
-
     </Shape>
 
-  <Sound maxFront="0.9" maxBack="0.9" minFront="0.0001" intensity="1" DEF="SOUND" >
-    <AudioClip DEF="AUDIO" url="snap.wav" loop="false"/>
-  </Sound>
+    <!-- SOUNDS -->
+    <Sound>
+        <AudioClip DEF="AUDIO" url="snap_short.wav" stopTime="0.1" />
+    </Sound>
+    <Sound>
+        <AudioClip DEF="AUDIO2" url="glass.wav" stopTime="0.1" />
+    </Sound>
+    <!-- -->
+    <!-- Possible way to make the sound more large? -->
+    <!-- http://staffwww.itn.liu.se/~karlu/work/Candy/classHVR_1_1ReverbSoundEffect.html -->
+    <!-- -->
+    <VRSound maxFront="0.9" maxBack="0.9" minFront="0.0001" intensity="0.5" >
+        <AudioClip url="ambient_fire.wav" startTime="10" loop="true"/>
+    </VRSound>
 
- <BooleanFilter DEF='B' />
+    <!-- ROUTES -->
+    <BooleanFilter DEF='BOOLFILTER' />
+    <TimeTrigger DEF='TIMETRIGGER' />
+    <BooleanFilter DEF='BOOLFILTER2' />
+    <TimeTrigger DEF='TIMETRIGGER2' />
 
-<ROUTE fromNode="RYGG" fromField="isTouched"
-         toNode="PY" toField="MFtoSFInt32" />
+    <ROUTE fromNode="RYGG" fromField="isTouched"
+             toNode="PY" toField="value" />
+    <ROUTE fromNode="PY" fromField="value"
+             toNode="BOOLFILTER" toField="set_boolean" />
+    <ROUTE fromNode="BOOLFILTER" fromField="inputTrue"
+             toNode="TIMETRIGGER" toField="set_boolean" />
+    <ROUTE fromNode="TIMETRIGGER" fromField="triggerTime"
+             toNode="AUDIO" toField="startTime" />
 
-<ROUTE fromNode="PY" fromField="MFtoSFInt32"
-         toNode="AUDIO" toField="startTime" />
+    <!-- New implementation for the seat, not working!
+    <ROUTE fromNode="BOTTEN" fromField="isTouched"
+             toNode="PY2" toField="value" />
+    <ROUTE fromNode="PY2" fromField="value"
+             toNode="BOOLFILTER2" toField="set_boolean" />
+    <ROUTE fromNode="BOOLFILTER2" fromField="inputTrue"
+             toNode="TIMETRIGGER2" toField="set_boolean" />
+    <ROUTE fromNode="TIMETRIGGER2" fromField="triggerTime"
+             toNode="AUDIO" toField="startTime"
+    -->
+	
+    <!-- ##################################### -->
+    
 
     <!-- Botten-->
     <Transform rotation="1 0 0 1.57" translation="0 -0.075 -0.045">
         <Shape>
             <Appearance shadow ="true">
                 <Material diffuseColor="0.9 0.9 0.9"/>
-                <FrictionalSurface DEF="BEN_H" stiffness="200" damping="5" useRelativeValues="false"/>
+                <FrictionalSurface DEF="BEN_H" stiffness="200" damping="1" useRelativeValues="false"/>
             </Appearance>
-            <Box size="0.1 0.1 0.01"/>
+            <Box DEF="BOTTEN" size="0.1 0.1 0.01"/>
         </Shape>
-    </Transform>
 
+    </Transform>
+    
     <!-- Ben-->
     <Transform translation="0.045 -0.13 0">
         <Shape DEF="BEN">
             <Appearance>
                 <Material diffuseColor="1 0 0"/>
-                <FrictionalSurface DEF="BEN_H" stiffness="1500" damping="5" useRelativeValues="false"/>
+                <FrictionalSurface DEF="BEN_H" stiffness="1000" damping="3" useRelativeValues="false"/>
             </Appearance>
             <Box size="0.01 0.1 0.01"/>
         </Shape>
@@ -103,6 +131,7 @@ and load libraries commonly used in the VR laboratory.
     <Transform translation="-0.045 -0.13 -0.09">
     <Shape USE="BEN"></Shape>
     </Transform>
+
  </Transform>
 </Group>
 
