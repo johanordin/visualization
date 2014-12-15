@@ -23,9 +23,9 @@ void drawWireCube(float size);
 //-----------------------
 // variable declarations
 //-----------------------
-sgct_utils::SGCTSphere * mySphere = NULL;
-sgct_utils::SGCTSphere * mySphere1 = NULL;
-sgct_utils::SGCTSphere * mySphere2 = NULL;
+sgct_utils::SGCTSphere * sphereSun = NULL;
+sgct_utils::SGCTSphere * sphereEarth = NULL;
+sgct_utils::SGCTSphere * sphereMoon = NULL;
 
 //store each device's transform 4x4 matrix in a shared vector
 sgct::SharedVector<glm::mat4> sharedTransforms;
@@ -74,19 +74,16 @@ int main( int argc, char* argv[] )
 
 void myInitOGLFun()
 {
-
-
-
-
 	sgct::TextureManager::instance()->setAnisotropicFilterSize(8.0f);
 	sgct::TextureManager::instance()->setCompression(sgct::TextureManager::S3TC_DXT);
-	sgct::TextureManager::instance()->loadTexure(myTextureHandle, "sphere", "sun.jpeg", true);
-	sgct::TextureManager::instance()->loadTexure(myTextureHandle, "sphere2", "earth.jpeg", true);
-	sgct::TextureManager::instance()->loadTexure(myTextureHandle, "sphere3", "moon.jpeg", true);
+	sgct::TextureManager::instance()->loadTexure(myTextureHandle, "textureSun", "sun.jpeg", true);
+	sgct::TextureManager::instance()->loadTexure(myTextureHandle, "textureEarth", "earth.jpeg", true);
+	sgct::TextureManager::instance()->loadTexure(myTextureHandle, "textureMoon", "moon.jpeg", true);
 
-	mySphere = new sgct_utils::SGCTSphere(0.2f, 30); //Jorden
-	mySphere1 = new sgct_utils::SGCTSphere(0.05f, 30); //Månen
-	mySphere2 = new sgct_utils::SGCTSphere(0.5f, 30); //Solen
+	sphereSun = new sgct_utils::SGCTSphere(0.5f, 30); 		//Solen
+	sphereEarth = new sgct_utils::SGCTSphere(0.2f, 30); 		//Jorden
+	sphereMoon = new sgct_utils::SGCTSphere(0.05f, 30); 		//Månen
+	
 
 
 	glEnable( GL_DEPTH_TEST );
@@ -222,42 +219,49 @@ void myPreSyncFun()
 */
 void myDrawFun()
 {
+  
+	//constants
 	double speed = 25.0;
 
-		//devicePtr = trackerPtr->getDevicePtr(size_t(0));
+	//devicePtr = trackerPtr->getDevicePtr(size_t(0));
+	//getNumberOfDevices();
 
-
-//getNumberOfDevices();
-
-	glBindTexture( GL_TEXTURE_2D, sgct::TextureManager::instance()->getTextureByName("sphere") );
-
-	glPushMatrix();
-	glRotated(curr_time.getVal() * speed, 0.0, -1.0, 0.0);
-/*
-	if (devicePtr->getPosition().x <= 0.5 && devicePtr->getPosition().y <= 0.5 && devicePtr->getPosition().z <= 0.5 )
-    {
+	
+	//bind Textures 
+	glBindTexture( GL_TEXTURE_2D, sgct::TextureManager::instance()->getTextureByName("textureSun") );
+	glBindTexture( GL_TEXTURE_2D, sgct::TextureManager::instance()->getTextureByName("textureEarth") );
+	glBindTexture( GL_TEXTURE_2D, sgct::TextureManager::instance()->getTextureByName("textureMoon") );
+	
+	/*
+	if (devicePtr->getPosition().x <= 0.5 && devicePtr->getPosition().y <= 0.5 && devicePtr-> getPosition().z <= 0.5 )
+	{
         glColor3f(1.0f,0.0f,0.0f);
-    }
-*/
-	mySphere2->draw();
-
+	}
+	*/
+	
+	// SUN
+	glPushMatrix(); //set where to start the current object transformations
+	glRotated(curr_time.getVal() * speed, 0.0, -1.0, 0.0);
+	sphereSun->draw();
 	glPopMatrix();
-
+	
+	// EARTH
 	glPushMatrix();
 	glRotated(curr_time.getVal() * speed, 0.0, -1.0, 0.0);
 	glTranslatef(1.0, 0.0f,0.0f);
 	glRotated(curr_time.getVal() * speed*2, 0.0, -1.0, 0.0);
-	glPushMatrix();
+	sphereEarth->draw();
+	glPopMatrix();
+	
+	// MOON
+	glPushMatrix();	
 	glRotated(curr_time.getVal() * speed*4, 0.0, -1.0, 0.0);
 	glTranslatef(0.3, 0.1f, 0.0f);
-	glBindTexture( GL_TEXTURE_2D, sgct::TextureManager::instance()->getTextureByName("sphere3") );
-	mySphere1->draw();
+	sphereMoon->draw();
 	glPopMatrix();
 
 	//glColor3f(1.0f,0.0f,0.0f);
-	glBindTexture( GL_TEXTURE_2D, sgct::TextureManager::instance()->getTextureByName("sphere2") );
-	mySphere->draw();
-	glPopMatrix();
+
 
 
 // 	//draw some yellow cubes in space
@@ -270,9 +274,6 @@ void myDrawFun()
 // 			drawWireCube(0.04f);
 // 			glPopMatrix();
 // 		}
-
-
-
 
 
 	//draw a cube and axes around each wand
