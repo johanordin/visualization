@@ -51,52 +51,8 @@ and load libraries commonly used in the VR laboratory.
         </Appearance>
         <Box DEF="RYGG" size="0.1 0.14 0.01" />
     </Shape>
-
-    <!-- SOUNDS -->
-    <Sound>
-        <AudioClip DEF="AUDIO" url="snap_short.wav" stopTime="0.1" />
-    </Sound>
-    <Sound>
-        <AudioClip DEF="AUDIO2" url="glass.wav" stopTime="0.1" />
-    </Sound>
-    <!-- -->
-    <!-- Possible way to make the sound more large? -->
-    <!-- http://staffwww.itn.liu.se/~karlu/work/Candy/classHVR_1_1ReverbSoundEffect.html -->
-    <!-- -->
-    <VRSound maxFront="0.9" maxBack="0.9" minFront="0.0001" intensity="0.5" >
-        <AudioClip url="ambient_fire.wav" startTime="10" loop="true"/>
-    </VRSound>
-
-    <!-- ROUTES -->
-    <BooleanFilter DEF='BOOLFILTER' />
-    <TimeTrigger DEF='TIMETRIGGER' />
-    <BooleanFilter DEF='BOOLFILTER2' />
-    <TimeTrigger DEF='TIMETRIGGER2' />
-
-    <ROUTE fromNode="RYGG" fromField="isTouched"
-             toNode="PY" toField="value" />
-    <ROUTE fromNode="PY" fromField="value"
-             toNode="BOOLFILTER" toField="set_boolean" />
-    <ROUTE fromNode="BOOLFILTER" fromField="inputTrue"
-             toNode="TIMETRIGGER" toField="set_boolean" />
-    <ROUTE fromNode="TIMETRIGGER" fromField="triggerTime"
-             toNode="AUDIO" toField="startTime" />
-
-    <!-- New implementation for the seat, not working!
-    <ROUTE fromNode="BOTTEN" fromField="isTouched"
-             toNode="PY2" toField="value" />
-    <ROUTE fromNode="PY2" fromField="value"
-             toNode="BOOLFILTER2" toField="set_boolean" />
-    <ROUTE fromNode="BOOLFILTER2" fromField="inputTrue"
-             toNode="TIMETRIGGER2" toField="set_boolean" />
-    <ROUTE fromNode="TIMETRIGGER2" fromField="triggerTime"
-             toNode="AUDIO" toField="startTime"
-    -->
 	
-    <!-- ##################################### -->
-    
-
-    <!-- Botten-->
+	<!-- Botten-->
     <Transform rotation="1 0 0 1.57" translation="0 -0.075 -0.045">
         <Shape>
             <Appearance shadow ="true">
@@ -107,8 +63,8 @@ and load libraries commonly used in the VR laboratory.
         </Shape>
 
     </Transform>
-    
-    <!-- Ben-->
+	
+	<!-- Ben-->
     <Transform translation="0.045 -0.13 0">
         <Shape DEF="BEN">
             <Appearance>
@@ -131,6 +87,53 @@ and load libraries commonly used in the VR laboratory.
     <Transform translation="-0.045 -0.13 -0.09">
     <Shape USE="BEN"></Shape>
     </Transform>
+	
+
+    <!-- SOUNDS -->
+    <Sound>
+        <AudioClip DEF="AUDIO" url="snap_short.wav" stopTime="0.1" />
+    </Sound>
+    <Sound>
+        <AudioClip DEF="AUDIO2" url="wood_on_pastic.wav" stopTime="0.1" />
+    </Sound>
+	
+    <!-- -->
+    <!-- Possible way to make the sound more large? -->
+    <!-- http://staffwww.itn.liu.se/~karlu/work/Candy/classHVR_1_1ReverbSoundEffect.html -->
+    <!-- -->
+    <VRSound maxFront="0.9" maxBack="0.9" minFront="0.0001" intensity="0.5" >
+        <AudioClip url="ambient_fire.wav" startTime="10" loop="true"/>
+    </VRSound>
+
+    <!-- ROUTES -->
+    <BooleanFilter DEF='BOOLFILTER' />
+    <TimeTrigger DEF='TIMETRIGGER' />
+    <BooleanFilter DEF='BOOLFILTER2' />
+    <TimeTrigger DEF='TIMETRIGGER2' />
+
+    <ROUTE fromNode="RYGG" fromField="isTouched"
+             toNode="PY" toField="value" />
+    <ROUTE fromNode="PY" fromField="value"
+             toNode="BOOLFILTER" toField="set_boolean" />
+    <ROUTE fromNode="BOOLFILTER" fromField="inputTrue"
+             toNode="TIMETRIGGER" toField="set_boolean" />
+    <ROUTE fromNode="TIMETRIGGER" fromField="triggerTime"
+             toNode="AUDIO2" toField="startTime" />
+
+    <!-- New implementation for the seat, not working! -->
+    <ROUTE fromNode="BOTTEN" fromField="isTouched"
+             toNode="PY2" toField="value" />
+    <ROUTE fromNode="PY2" fromField="value"
+             toNode="BOOLFILTER2" toField="set_boolean" />
+    <ROUTE fromNode="BOOLFILTER2" fromField="inputTrue"
+             toNode="TIMETRIGGER2" toField="set_boolean" />
+    <ROUTE fromNode="TIMETRIGGER2" fromField="triggerTime"
+             toNode="AUDIO" toField="startTime" />
+
+	
+    <!-- ##################################### -->
+    
+
 
  </Transform>
 </Group>
