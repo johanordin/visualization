@@ -6,13 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/home/johno855/Documents/labb3/test/tracking9/main.cpp
+/home/johno855/Documents/labb3/Voreen-linux/Labb3/dev_branch/main.cpp
 stdlib.h
 -
 stdio.h
 -
 sgct.h
-/home/johno855/Documents/labb3/test/tracking9/sgct.h
+/home/johno855/Documents/labb3/Voreen-linux/Labb3/dev_branch/sgct.h
 sstream
 -
 

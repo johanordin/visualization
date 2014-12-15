@@ -50,10 +50,10 @@ EQUALS = =
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/johno855/Documents/labb3/test/tracking9
+CMAKE_SOURCE_DIR = /home/johno855/Documents/labb3/Voreen-linux/Labb3/dev_branch
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/johno855/Documents/labb3/test/tracking9
+CMAKE_BINARY_DIR = /home/johno855/Documents/labb3/Voreen-linux/Labb3/dev_branch
 
 #=============================================================================
 # Target rules for target CMakeFiles/trackingExample.dir
@@ -62,7 +62,7 @@ CMAKE_BINARY_DIR = /home/johno855/Documents/labb3/test/tracking9
 CMakeFiles/trackingExample.dir/all:
 	$(MAKE) -f CMakeFiles/trackingExample.dir/build.make CMakeFiles/trackingExample.dir/depend
 	$(MAKE) -f CMakeFiles/trackingExample.dir/build.make CMakeFiles/trackingExample.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/johno855/Documents/labb3/test/tracking9/CMakeFiles  1
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/johno855/Documents/labb3/Voreen-linux/Labb3/dev_branch/CMakeFiles  1
 	@echo "Built target trackingExample"
 .PHONY : CMakeFiles/trackingExample.dir/all
 
@@ -72,9 +72,9 @@ all: CMakeFiles/trackingExample.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/trackingExample.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/johno855/Documents/labb3/test/tracking9/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/johno855/Documents/labb3/Voreen-linux/Labb3/dev_branch/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/trackingExample.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/johno855/Documents/labb3/test/tracking9/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/johno855/Documents/labb3/Voreen-linux/Labb3/dev_branch/CMakeFiles 0
 .PHONY : CMakeFiles/trackingExample.dir/rule
 
 # Convenience name for target.

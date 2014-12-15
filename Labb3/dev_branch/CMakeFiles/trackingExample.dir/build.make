@@ -38,10 +38,10 @@ EQUALS = =
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/johno855/Documents/labb3/test/tracking9
+CMAKE_SOURCE_DIR = /home/johno855/Documents/labb3/Voreen-linux/Labb3/dev_branch
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/johno855/Documents/labb3/test/tracking9
+CMAKE_BINARY_DIR = /home/johno855/Documents/labb3/Voreen-linux/Labb3/dev_branch
 
 # Include any dependencies generated for this target.
 include CMakeFiles/trackingExample.dir/depend.make
@@ -54,17 +54,17 @@ include CMakeFiles/trackingExample.dir/flags.make
 
 CMakeFiles/trackingExample.dir/main.cpp.o: CMakeFiles/trackingExample.dir/flags.make
 CMakeFiles/trackingExample.dir/main.cpp.o: main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/johno855/Documents/labb3/test/tracking9/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/johno855/Documents/labb3/Voreen-linux/Labb3/dev_branch/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/trackingExample.dir/main.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/trackingExample.dir/main.cpp.o -c /home/johno855/Documents/labb3/test/tracking9/main.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/trackingExample.dir/main.cpp.o -c /home/johno855/Documents/labb3/Voreen-linux/Labb3/dev_branch/main.cpp
 
 CMakeFiles/trackingExample.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/trackingExample.dir/main.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/johno855/Documents/labb3/test/tracking9/main.cpp > CMakeFiles/trackingExample.dir/main.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/johno855/Documents/labb3/Voreen-linux/Labb3/dev_branch/main.cpp > CMakeFiles/trackingExample.dir/main.cpp.i
 
 CMakeFiles/trackingExample.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/trackingExample.dir/main.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/johno855/Documents/labb3/test/tracking9/main.cpp -o CMakeFiles/trackingExample.dir/main.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/johno855/Documents/labb3/Voreen-linux/Labb3/dev_branch/main.cpp -o CMakeFiles/trackingExample.dir/main.cpp.s
 
 CMakeFiles/trackingExample.dir/main.cpp.o.requires:
 .PHONY : CMakeFiles/trackingExample.dir/main.cpp.o.requires
@@ -117,6 +117,6 @@ CMakeFiles/trackingExample.dir/clean:
 .PHONY : CMakeFiles/trackingExample.dir/clean
 
 CMakeFiles/trackingExample.dir/depend:
-	cd /home/johno855/Documents/labb3/test/tracking9 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/johno855/Documents/labb3/test/tracking9 /home/johno855/Documents/labb3/test/tracking9 /home/johno855/Documents/labb3/test/tracking9 /home/johno855/Documents/labb3/test/tracking9 /home/johno855/Documents/labb3/test/tracking9/CMakeFiles/trackingExample.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/johno855/Documents/labb3/Voreen-linux/Labb3/dev_branch && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/johno855/Documents/labb3/Voreen-linux/Labb3/dev_branch /home/johno855/Documents/labb3/Voreen-linux/Labb3/dev_branch /home/johno855/Documents/labb3/Voreen-linux/Labb3/dev_branch /home/johno855/Documents/labb3/Voreen-linux/Labb3/dev_branch /home/johno855/Documents/labb3/Voreen-linux/Labb3/dev_branch/CMakeFiles/trackingExample.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/trackingExample.dir/depend
 
