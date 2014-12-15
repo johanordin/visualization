@@ -1,0 +1,40 @@
+ls -la
+cp -r /usr/share/sgct/examples/trackingExample kjs
+cd kjs/
+ls
+mkdir build
+cd build/
+cmake ..
+make
+ls -la
+cd ..
+ls -la
+./trackingExample -config /usr/share/sgct/config/single
+./trackingExample -config /usr/share/sgct/config/single.xml 
+cd ..
+ls -la
+cd track
+cd trackE
+ls -la
+cd tracking8/
+ls -la
+cp ../kjs/CMakeLists.txt .
+mkdir build
+cd build/
+cmake ..
+make
+cd ..
+ls -la
+rm -r CMakeFiles/ CMakeCache.txt 
+cd build/
+cmake ..
+cd ..
+rm Makefile 
+ls -la
+make -C build/
+./trackingExample -config single.xml 
+ls -la
+emacs main.cpp &
+
+
+
