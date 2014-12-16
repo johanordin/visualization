@@ -234,6 +234,9 @@ void myDrawFun()
 
 	Sun_check = false;
 
+
+// Do it with the trackerDevice
+
 	for(size_t i = 0; i < sgct::Engine::getTrackingManager()->getNumberOfTrackers(); i++) {
 
         trackerPtr = sgct::Engine::getTrackingManager()->getTrackerPtr(i);
@@ -275,6 +278,7 @@ void myDrawFun()
 
             //glm::vec4 wand_direction_v4 = rotMat*negativeZ;
 
+            // Sharedtransform
             // using the Sharedtransformation matrix
             glm::vec4 wand_direction_v4 = sharedTransforms.getValAt(j) * negativeZ;
 
@@ -300,6 +304,48 @@ void myDrawFun()
 
 	      }
 	}
+
+
+// Do it without the trackerDevice
+
+	for(size_t i = 0; i < sharedTransforms.getSize(); i++)
+	{
+		if(i != sharedHeadSensorIndex.getVal())
+		{
+
+
+		    //help vector to get fetch the transformation matrix
+		    glm::vec4 getCoordinates = glm::vec4(0.f,0.f,0.f,1.f);
+		    glm::vec4 getRotation    = glm::vec4(0.f,0.f,-1.f,0.f);
+
+		    //get the Coordinates and rotation matrix
+		    glm::vec4 wandCoordinates_v4 = sharedTransforms.getValAt( i ) * getCoordinates;
+		    glm::vec4 wandDirection_v4 = sharedTransforms.getValAt( i ) * getRotation;
+
+		    //cast to vec3
+            glm::vec3 wandCoordinates_v3 = glm::vec3(wandCoordinates_v4);
+            glm::vec3 wandDirection_v3 = glm::vec3(wandDirection_v4);
+
+            // the origin of the sun --> constant
+            glm::vec3 sunPosition = glm::vec3(0.f,0.f,0.f);
+            // Distance from the wand to the sun. --> want the vector to point to the sun --> (0,0,0) - (a,b,c) = negative
+            glm::vec3 distanceToSun = sunPosition - wandCoordinates_v3;
+
+
+            //calulate the projection onto the wand direction vector  --> new vector
+            glm::vec3 projectionVec = glm::normalize (wandDirection_v3 ) * glm::dot(wandDirection_v3, distanceToSun);
+
+            glm::vec3 distance = distanceToSun - projectionVec;
+
+            if ( glm::length(distance) < SUN_RADIUS ) {
+                Sun_check = true;
+
+            }
+
+		}
+    }
+
+
 
 
 	// EARTH
