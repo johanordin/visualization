@@ -337,7 +337,9 @@ void myDrawFun()
 
             glm::vec3 distance = distanceToSun - projectionVec;
 
-            if ( glm::length(distance) < SUN_RADIUS ) {
+            float length = sqrt(pow(distance.x,2) + pow(distance.y,2) + pow(distance.z,2));
+
+            if ( length < SUN_RADIUS ) {
                 Sun_check = true;
 
             }
