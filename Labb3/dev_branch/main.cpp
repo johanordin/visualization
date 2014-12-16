@@ -234,80 +234,68 @@ void myDrawFun()
 
 	Sun_check = false;
 
-	//devicePtr = trackerPtr->getDevicePtr(size_t(0));
-	//getNumberOfDevices();
+	for(size_t i = 0; i < sgct::Engine::getTrackingManager()->getNumberOfTrackers(); i++) {
 
-		/*
-	if (devicePtr->getPosition().x <= 0.5 && devicePtr->getPosition().y <= 0.5 && devicePtr-> getPosition().z <= 0.5 )
-	{
-        glColor3f(1.0f,0.0f,0.0f);
-	}
-	*/
+        trackerPtr = sgct::Engine::getTrackingManager()->getTrackerPtr(i);
 
-	for(size_t i = 0; i < sgct::Engine::getTrackingManager()->getNumberOfTrackers(); i++)
-	{
-	    trackerPtr = sgct::Engine::getTrackingManager()->getTrackerPtr(i);
+        // loop trough all the devices to find the wand
+        for(size_t j = 0; j < trackerPtr->getNumberOfDevices(); j++) {
 
-	      // loop trough all the devices to find the wand
-	      for(size_t j = 0; j < trackerPtr->getNumberOfDevices(); j++) {
+            // we have found the wand if this is true
+            if( j != sharedHeadSensorIndex.getVal() ) {
 
-		  // we have found the wand if this is true
-		  if( j != sharedHeadSensorIndex.getVal() ) {
+            //store the wand in the wandPtr
+            wandPtr = trackerPtr->getDevicePtr(j);
 
-		    //store the wand in the wandPtr
-		    wandPtr = trackerPtr->getDevicePtr(j);
+            // get the coordinates (x,y,z) of the wand
+            glm::vec3 wandPosition = wandPtr->getPosition();
+//
+//            // get the Euler angeles around the x,y,z axis.
+//            glm::vec3 wandRotationEuler = wandPtr->getEulerAngles();
 
-		    // get the coordinates (x,y,z) of the wand
-		    glm::vec3 wandPosition = wandPtr->getPosition();
+            // ---------------------------------------------------------------------------------//
+            //Calculate the distance between the Wand and the Object (Ths SUN in this case)
 
-		    // get the Euler angeles around the x,y,z axis.
-		    glm::vec3 wandRotationEuler = wandPtr->getEulerAngles();
+            // the origin of the sun --> constant
+            glm::vec3 sunPosition = glm::vec3(0.f,0.f,0.f);
 
-		    // ---------------------------//
-		    //Calculate the distance between the Wand and the Object (Ths SUN in this case)
+            // Already have the wandPosition
 
-		    // the origin of the sun --> constant
-		    glm::vec3 sunPosition = glm::vec3(0.f,0.f,0.f);
+            // OUR b vector --> Distance from the wand to the sun. --> want the vector to point to the sun --> (0,0,0) - (a,b,c) = negative
+            glm::vec3 distanceToSun = sunPosition - wandPosition;
 
-		    // Already have the wandPosition
+            // ---------------------------------------------------------------------------------//
+            //Calculate the where to wand is pointing
 
-		    // OUR b vector --> Distance from the wand to the sun. --> want the vector to point to the sun --> (0,0,0) - (a,b,c) = negative
-		    glm::vec3 distanceToSun = sunPosition - wandPosition;
+            //4x4 homogeneous rotation matrix from the euler angles
+            //glm::mat4 rotMat = glm::yawPitchRoll(wandRotationEuler);
 
-		    // ---------------------------//
-		    //Calculate the where to wand is pointing
+            // unit vector in the z-direction
+            glm::vec4 negativeZ = glm::vec4(0.f,0.f,-1.f,0.f);
 
-		    //4x4 homogeneous rotation matrix from the euler angles
-		    //glm::mat4 rotMat = glm::yawPitchRoll(wandRotationEuler);
+            //glm::vec4 wand_direction_v4 = rotMat*negativeZ;
 
-		    glm::vec4 negativeZ = glm::vec4(0.f,0.f,-1.f,0.f);
-
-		    //glm::vec4 wand_direction_v4 = rotMat*negativeZ;
-		    glm::vec4 wand_direction_v4 = sharedTransforms.getValAt(j) * negativeZ;
+            // using the Sharedtransformation matrix
+            glm::vec4 wand_direction_v4 = sharedTransforms.getValAt(j) * negativeZ;
 
 
-		    // ---------------------------//
-		    //Calculate the vector d, which is the distance between origin of the SUN and the closest point from the line.
+            // ---------------------------------------------------------------------------------//
+            //Calculate the distance d, which is the distance between origin of the SUN and the closest point from the line.
 
-		    //cast to vec3
-		    glm::vec3 wand_direction_v3 = glm::vec3(wand_direction_v4);
+            //cast to vec3
+            glm::vec3 wand_direction_v3 = glm::vec3(wand_direction_v4);
 
-		    //calulate the projection onto the wand direction vector  --> new vector
-		    glm::vec3 projectionVec = glm::normalize (wand_direction_v3 ) * glm::dot(wand_direction_v3, distanceToSun);
+            //calulate the projection onto the wand direction vector  --> new vector
+            glm::vec3 projectionVec = glm::normalize (wand_direction_v3 ) * glm::dot(wand_direction_v3, distanceToSun);
 
+            glm::vec3 distance = distanceToSun - projectionVec;
 
-		    glm::vec3 distance = distanceToSun - projectionVec;
+            if ( glm::length(distance) < SUN_RADIUS ) {
+                Sun_check = true;
 
+            }
 
-
-		    if ( glm::length(distance) < SUN_RADIUS ) {
-
-		      //change some color?? or set some boolean to change the color.
-		      Sun_check = true;
-
-		    }
-
-		  }
+            }
 
 
 	      }
@@ -331,7 +319,6 @@ void myDrawFun()
 	glPopMatrix();
 	glPopMatrix();
 	//glColor3f(1.0f,0.0f,0.0f);
-
 
     // SUN
 	glPushMatrix(); //set where to start the current object transformations
