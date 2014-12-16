@@ -84,26 +84,26 @@ int main( int argc, char* argv[] )
 
 void myInitOGLFun()
 {
-  
+
 	glEnable( GL_DEPTH_TEST );
 	glEnable( GL_COLOR_MATERIAL );
 	glDisable( GL_LIGHTING );
 	glEnable( GL_CULL_FACE );
 	glEnable( GL_TEXTURE_2D );
-	
+
 	glCullFace(GL_BACK);
 	glFrontFace(GL_CCW);
-	
+
 	sgct::TextureManager::instance()->setAnisotropicFilterSize(8.0f);
 	sgct::TextureManager::instance()->setCompression(sgct::TextureManager::S3TC_DXT);
 	sgct::TextureManager::instance()->loadTexure(myTextureHandle, "textureSun", "sun.jpeg", true);
 	sgct::TextureManager::instance()->loadTexure(myTextureHandle, "textureEarth", "earth.jpeg", true);
 	sgct::TextureManager::instance()->loadTexure(myTextureHandle, "textureMoon", "moon.jpeg", true);
-	
+
 	sphereSun = new sgct_utils::SGCTSphere(SUN_RADIUS, 30); 		//Solen
 	sphereEarth = new sgct_utils::SGCTSphere(EARTH_RADIUS, 30); 		//Jorden
 	sphereMoon = new sgct_utils::SGCTSphere(MOON_RADIUS, 30); 		//Månen
-	
+
 	//only store the tracking data on the master node
 	if( gEngine->isMaster() )
 	{
@@ -123,7 +123,7 @@ void myInitOGLFun()
 				{
 					sharedTransforms.addVal( glm::mat4(1.0f) );
 
-					//find the head 
+					//find the head
 					if( sgct::Engine::getTrackingManager()->getHeadDevicePtr() == devicePtr )
 						sharedHeadSensorIndex.setVal(index);
 
@@ -228,10 +228,10 @@ void myPreSyncFun()
 */
 void myDrawFun()
 {
-  
+
 	//constants
 	double speed = 25.0;
-	
+
 	Sun_check = false;
 
 	//devicePtr = trackerPtr->getDevicePtr(size_t(0));
@@ -243,91 +243,77 @@ void myDrawFun()
         glColor3f(1.0f,0.0f,0.0f);
 	}
 	*/
-		    
+
 	for(size_t i = 0; i < sgct::Engine::getTrackingManager()->getNumberOfTrackers(); i++)
 	{
 	    trackerPtr = sgct::Engine::getTrackingManager()->getTrackerPtr(i);
-	
+
 	      // loop trough all the devices to find the wand
 	      for(size_t j = 0; j < trackerPtr->getNumberOfDevices(); j++) {
-	      
+
 		  // we have found the wand if this is true
 		  if( j != sharedHeadSensorIndex.getVal() ) {
-		    
+
 		    //store the wand in the wandPtr
 		    wandPtr = trackerPtr->getDevicePtr(j);
-		    
+
 		    // get the coordinates (x,y,z) of the wand
 		    glm::vec3 wandPosition = wandPtr->getPosition();
-		    
+
 		    // get the Euler angeles around the x,y,z axis.
 		    glm::vec3 wandRotationEuler = wandPtr->getEulerAngles();
-		    
-		    
+
 		    // ---------------------------//
 		    //Calculate the distance between the Wand and the Object (Ths SUN in this case)
-		    
+
 		    // the origin of the sun --> constant
 		    glm::vec3 sunPosition = glm::vec3(0.f,0.f,0.f);
-		    
+
 		    // Already have the wandPosition
-		    
+
 		    // OUR b vector --> Distance from the wand to the sun. --> want the vector to point to the sun --> (0,0,0) - (a,b,c) = negative
 		    glm::vec3 distanceToSun = sunPosition - wandPosition;
-		    
-		    
+
 		    // ---------------------------//
 		    //Calculate the where to wand is pointing
-		    
+
 		    //4x4 homogeneous rotation matrix from the euler angles
 		    //glm::mat4 rotMat = glm::yawPitchRoll(wandRotationEuler);
-		    
+
 		    glm::vec4 negativeZ = glm::vec4(0.f,0.f,-1.f,0.f);
-		    
+
 		    //glm::vec4 wand_direction_v4 = rotMat*negativeZ;
-		    
 		    glm::vec4 wand_direction_v4 = sharedTransforms.getValAt(j) * negativeZ;
-		    
-		    
+
+
 		    // ---------------------------//
 		    //Calculate the vector d, which is the distance between origin of the SUN and the closest point from the line.
-		    
+
 		    //cast to vec3
 		    glm::vec3 wand_direction_v3 = glm::vec3(wand_direction_v4);
-		    
+
 		    //calulate the projection onto the wand direction vector  --> new vector
-		    glm::vec3 projectionVec = wand_direction_v3 * glm::dot(wand_direction_v3, distanceToSun);
-		    
-		    
+		    glm::vec3 projectionVec = glm::normalize (wand_direction_v3 ) * glm::dot(wand_direction_v3, distanceToSun);
+
+
 		    glm::vec3 distance = distanceToSun - projectionVec;
-		    
-		    
-		    
+
+
+
 		    if ( glm::length(distance) < SUN_RADIUS ) {
-		      
+
 		      //change some color?? or set some boolean to change the color.
 		      Sun_check = true;
-		      
+
 		    }
-		    
-		    
-		    
-		    
+
 		  }
-		
-		
+
+
 	      }
 	}
-	
-	
-	
-	
-	//bind Textures 
-	
-	
-	
 
-	
+
 	// EARTH
 	glPushMatrix();
 	glRotated(curr_time.getVal() * speed, 0.0, -1.0, 0.0);
@@ -335,10 +321,9 @@ void myDrawFun()
 	glRotated(curr_time.getVal() * speed*2, 0.0, -1.0, 0.0);
 	glBindTexture( GL_TEXTURE_2D, sgct::TextureManager::instance()->getTextureByName("textureEarth") );
 	sphereEarth->draw();
-	
-	
+
 	// MOON
-	glPushMatrix();	
+	glPushMatrix();
 	glRotated(curr_time.getVal() * speed*4, 0.0, -1.0, 0.0);
 	glTranslatef(0.3, 0.1f, 0.0f);
 	glBindTexture( GL_TEXTURE_2D, sgct::TextureManager::instance()->getTextureByName("textureMoon") );
@@ -346,20 +331,20 @@ void myDrawFun()
 	glPopMatrix();
 	glPopMatrix();
 	//glColor3f(1.0f,0.0f,0.0f);
-	
-	
-		// SUN
+
+
+    // SUN
 	glPushMatrix(); //set where to start the current object transformations
 	glRotated(curr_time.getVal() * speed, 0.0, -1.0, 0.0);
-	
-	if ( Sun_check ){  
+
+	if ( Sun_check ){
 	  glColor3f(1.0f,0.0f,0.0f);
 	}
 	glBindTexture( GL_TEXTURE_2D, sgct::TextureManager::instance()->getTextureByName("textureSun") );
 	sphereSun->draw();
 	glPopMatrix();
 
-	
+
 // 	//draw some yellow cubes in space
 // 	for( float i=-0.5f; i<=0.5f; i+=0.2f)
 // 		for(float j=-0.5f; j<=0.5f; j+=0.2f)
