@@ -50,7 +50,7 @@ sgct::SharedDouble curr_time(0.0);
 
 size_t myTextureHandle;
 
-bool Sun_check;
+bool sun_interaction;
 
 int main(int argc, char* argv[])
 {
@@ -232,7 +232,7 @@ void myDrawFun()
     //constants
     double speed = 25.0;
     
-    Sun_check = false;
+    sun_interaction = false;
     
     // Do it without the trackerDevice
     
@@ -243,7 +243,7 @@ void myDrawFun()
             glm::vec4 getCoordinates = glm::vec4(0.f, 0.f, 0.f, 1.f);
             glm::vec4 getRotation = glm::vec4(0.f, 0.f, -1.f, 0.f);
             
-            //get the Coordinates and rotation matrix
+            //get the Coordinates and rotation matrix from the sharedTransformation matrix
             glm::vec4 wandCoordinates_v4 = sharedTransforms.getValAt(i) * getCoordinates;
             glm::vec4 wandDirection_v4 = sharedTransforms.getValAt(i) * getRotation;
             
@@ -256,16 +256,17 @@ void myDrawFun()
             // Distance from the wand to the sun. --> want the vector to point to the sun --> (0,0,0) - (a,b,c) = negative
             glm::vec3 distanceToSun = sunPosition - wandCoordinates_v3;
             
-            
             //calulate the projection onto the wand direction vector  --> new vector
             glm::vec3 projectionVec = glm::normalize(wandDirection_v3) * glm::dot(wandDirection_v3, distanceToSun);
             
+            // calculate the vector which is the distance from the projection vector to the center of the sun.
             glm::vec3 distance = distanceToSun - projectionVec;
             
+            // calculate the length distance vector.
             float length = sqrt(pow(distance.x, 2) + pow(distance.y, 2) + pow(distance.z, 2));
             
             if (length < SUN_RADIUS) {
-                Sun_check = true;
+                sun_interaction = true;
                 
             }
             
@@ -294,9 +295,11 @@ void myDrawFun()
     glPushMatrix(); //set where to start the current object transformations
     glRotated(curr_time.getVal() * speed, 0.0, -1.0, 0.0);
     
-    if (Sun_check){
+    // if the the pointer from the wand is closer than the radius of the sun --> change color to red
+    if ( sun_interaction ){
         glColor3f(1.0f, 0.0f, 0.0f);
     }
+    
     glBindTexture(GL_TEXTURE_2D, sgct::TextureManager::instance()->getTextureByName("textureSun"));
     sphereSun->draw();
     glPopMatrix();
