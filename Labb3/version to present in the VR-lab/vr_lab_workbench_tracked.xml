@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<Cluster masterAddress="localhost">
+	<Node address="localhost" port="20401">
+		<Window fullscreen="true" monitor="1" msaa="4">
+			<Stereo type="checkerboard" />
+			<Pos x="0" y="0" />
+			<Size x="1920" y="1080" />
+			<Viewport tracked="true">
+				<Pos x="0.0" y="0.0" />
+				<Size x="1.0" y="1.0" />
+				<Viewplane>
+					<!-- Lower left -->
+					<Pos x="-0.84914" y="-0.5495" z="-0.235" />
+					<!-- Upper left -->
+					<Pos x="-0.84914" y="0.4135" z="-0.235" />
+					<!-- Upper right -->
+					<Pos x="0.84114" y="0.4135" z="-0.235" />
+				</Viewplane>
+			</Viewport>
+		</Window>
+	</Node>
+	<User eyeSeparation="0.06">
+		<Pos x="0.0" y="0.15" z="1.5" />
+		<Tracking tracker="IS900" device="Head" />
+	</User>
+	<Tracker name="IS900">
+		<Device name="Head">
+			<Sensor id="1" vrpnAddress="IS900@itn-vortex.itn.liu.se" />
+			<Matrix x0="0.0"	y0="0.0"	z0="-1.0"	w0="0.0"
+				x1="1.0"	y1="0.0"	z1="0.0"	w1="0.0"
+				x2="0.0"	y2="-1.0"	z2="0.0"	w2="0.0"
+				x3="0.0"	y3="0.0"	z3="0.0"	w3="1.0" />
+		</Device>
+		<Device name="Wand">
+			<Sensor id="0" vrpnAddress="IS900@itn-vortex.itn.liu.se" />
+			<Buttons count="6" vrpnAddress="Wand@itn-vortex.itn.liu.se" />
+			<Axes count="2" vrpnAddress="Wand@itn-vortex.itn.liu.se" />
+			<Matrix x0="0.0"	y0="0.0"	z0="-1.0"	w0="0.0"
+				x1="1.0"	y1="0.0"	z1="0.0"	w1="0.0"
+				x2="0.0"	y2="-1.0"	z2="0.0"	w2="0.0"
+				x3="0.0"	y3="0.0"	z3="0.0"	w3="1.0" />
+		</Device>
+		<Matrix
+				x0="0.838363"	y0="0.522161"	z0="-0.0593437"		w0="0.120892"
+				x1="-0.0326775"	y1="-0.0254518"	z1="-0.992038"		w1="0.658816"
+				x2="-0.477019"	y2="0.87656"	z2="-0.0524612"		w2="1.22204"
+				x3="0.0"	y3="0.0"	z3="0.0"		w3="1.0" />
+	</Tracker>
+</Cluster>
