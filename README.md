@@ -1,5 +1,4 @@
-to be run:
-
+## to be run:
 git config --global user.name "johno855"
 
 git config --global user.email johno855@student.liu.se
